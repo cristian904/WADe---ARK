@@ -1,0 +1,112 @@
+openapi: "3.0.0"
+info:
+  title: ARK API
+  description: Client - server API
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /romanian-heritage-museums:
+    get:
+      description: Retrieve a list of all Romanian museums available via data.gov
+      responses:
+        '200':
+          description: 200 response
+            content:
+              application/json:
+                examples:
+                  foo:
+                    value: {
+                      "museums": [
+                        {
+                          "name" : "Muzeul de Arta",
+                          "position" : {
+                            "latitude" : "23,56",
+                            "longitude" : "34,211"
+                          }
+                        },
+                        {
+                          "name": "Muzeul de Arta",
+                          "position" : {
+                            "latitude" : "23,56",
+                            "longitude" : "34,211"
+                          }
+                        }
+                      ]
+                    }
+  /art-work:
+    get:
+      description: Retrieve list of artistic works that satisfy some constrains
+      parameters:
+      - name:
+        in: query
+        required: false
+      - author:
+        in: query
+        required: false
+      - museum:
+        in: query
+        required: false
+      - current:
+        in: query
+        required: false
+      responses:
+        '200':
+          description: 200 response
+            content:
+              application/json:
+                examples:
+                  foo:
+                    value: {
+                      "art-works" : [
+                        {
+                          "name": "Mona Lisa",
+                          "museum": "Muzeul de Arta - Iasi",
+                          "current": "post-neo-iluminism",
+                          "year": 1666
+                        },
+                        {
+                          "name": "Mona Lisa",
+                          "museum": "Muzeul de Arta - Iasi",
+                          "current": "post-neo-iluminism",
+                          "year": 1666
+                        }
+                      ]
+                    }
+  /artists:
+    get:
+      description: Retrieve a list or artists that satisfy some constrains
+      parameters:
+      - name:
+        in: query
+        required: false
+      - current:
+        in: query
+        required: false
+      - museum:
+        in: query
+        required: false
+      response:
+        '200':
+           description: 200 response
+            content:
+              application/json:
+                examples:
+                  foo:
+                    value: {
+                      "artists": [
+                        {
+                          "name": "Brancusi",
+                          "current": "romanesc"
+                        },
+                        {
+                          "name": "Brancusi",
+                          "current": "romanesc"
+                        }
+                      ]
+                    }
+
+
+      
