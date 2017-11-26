@@ -2,10 +2,10 @@
 
 The project is developed durind the WADe course of the Computer Faculty in Iasi (fall 2017).
 
-##Team
+## Team
 Padurariu Constantin Cristian
 Silion Dragos
 
-##Coordinator
+## Coordinator
 Lect. Dr. Sabin-Corneliu Buraga
 
