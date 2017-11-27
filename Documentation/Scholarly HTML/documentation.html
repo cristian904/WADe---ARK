@@ -57,7 +57,7 @@
         <section style="text-align: center;width: 400px;margin: auto"  typeof = "sa:Abstract" role = "doc-abstract">
         <h2>Abstract</h2>
            <p> This solution offers an interactive way to explore the Romanian Heritage. Using this platform you can easily browse through different museums and works of art available in Romania.
-        Our main purpose is easing the access to the Works of art in Romanian museums. Besides that we offer an easy way to visualize data and statistics around museums, artists and pieces of art.</p>
+        Our main purpose is easing the access to the Works of art in Romanian museums. Besides that, we offer an easy way to visualize data and statistics around museums, artists and pieces of art.</p>
         </section>
         <div  style="text-align: center;width: 1000px;margin:auto">
         <section class="identation" role="doc-index">
@@ -70,13 +70,15 @@
                         <li><a href="#gettyVocabularies">Getty Vocabularies</a></li>
                         <li><a href="#sparql">SPARQL</a></li>
                         <li><a href="#govData">Governmental Data</a></li>
-                        <li><a href="#provenance">Provenance</a></li>
+                        <li><a href="#provenance">PROV Book</a></li>
                     </ol>
                 </li>
                 <li><a href="#arhitecture">Architecture</a>
                 <ol>
                     <li><a href="#client">Client</a></li>
                     <li><a href="#server">Server</a></li>
+                    <li><a href="#database">Database</a></li>
+                    <li><a href="#overview">Overview</a></li>
                 </ol>
                 </li>
                 <li><a href="#bibliography">Bibliography</a>
@@ -85,30 +87,30 @@
         </section>
         <section class="identation" id="introduction" role="doc-introduction">
             <h2>Introduction</h2>
-            <p>The report describes the concepts and technologies that will be applied in the development of the project. We will go through the specific APIs and Web Services that will be present in the project, the general architecture of the project that presents the main components/models, but also a general overview that will incorporate all these concepts into one web application. 
-                This projects sets out to offer an intelligent and interactive way of visualizing, relevant and verified data about different works of art available in Romanian museums.
-                The work is being done as part of the Web Application Development course held by Lect. Dr. Sabin-Corneliu Buraga, professor at the Faculty of Computer Science in Iasi.
+            <p>The report describes the <b>concepts and technologies</b> that will be applied in the development of the project. We will go through the specific APIs and Web Services that will be present in the project, the general architecture of the project that presents the main components/models, but also a general overview that will incorporate all these concepts into one web application. 
+                This projects sets out to offer an <b>intelligent and interactive way of visualizing</b> to visualize relevant and verified data about different works of art available in <b>Romanian museums</b>.
+                The work is being done as part of the <b>Web Application Development</b> course held by  <cite property="schema:name"><a href="https://profs.info.uaic.ro/~busaco/">Conf. Dr. Sabin-Corneliu Buraga</a></cite>, professor at the Faculty of Computer Science in Iasi.
             </p>
         </section>
         <section class="identation" id = "servicesApis">
             <h2>Web services and APIs</h2>
             <p>In order to achieve this we will use a set of web services and APIs in order to fetch our data. This will spare us of the trouble of gathering the date regarding the artistic works that we will have to model and display.</p>
             <h3 id="dbpedia">DBPedia</h3>
-            <p>DBpedia allows you to ask sophisticated queries against Wikipedia, and to link the different data sets on the Web to Wikipedia data. We will use these capabilities to find out more information about certain artistic work/artist/museum.</p>
+            <p>DBpedia allows you to ask <b>sophisticated queries against Wikipedia</b>, and to link the different data sets on the Web to Wikipedia data. We will use these capabilities to find out more information about certain artistic work/artist/museum.</p>
             <h3 id="gettyVocabularies">Getty Vocabularies</h3>
             <p>This contain structured terminology for art and other material culture, archival materials, visual surrogates, and bibliographic materials. This can be also used as a source for gathering relevant about artistic work/artist/museum and other data useful to the project.</p>
             <h3 id="sparql">SPARQL</h3>
-            <p>We will access the data provided via DBPedia and Getty Vocabularies via a SPARQL endpoint. SPARQL is RDF query language, that is, a semantic query language for databases, able to retrieve and manipulate data stored in Resource Description Framework (RDF) format. So this will help us execute complex queries and provides an easy way to handle the data.</p>
+            <p>We will access the data provided via DBPedia and Getty Vocabularies via a SPARQL endpoint. SPARQL is <b>RDF query language</b>, that is, a semantic query language for databases, able to retrieve and manipulate data stored in Resource Description Framework (RDF) format. So this will help us execute complex queries and provides an easy way to handle the data.</p>
             <h3 id="govData">Governmental Data</h3>
-            <p>The Romanian government offers, freely, different data sets. We will use the information they have available for statistical use, regarding the Romanian Heritage. This data will point us to the main artists / works of art / museum available in Romanian. The information extracted from here is minimal that’s why we need the help of DBPedia in achieving an exhaustive search. </p>
-            <h3 id="provenance">Provenance</h3>
-            <p>Now we have all the data we need, from the data providers mentioned above, but we should also check the provenance of each piece of data. Provenance is a record that describes the people, institutions, entities, and activities, involved in producing, influencing, or delivering a piece of data or a thing in the world. So, only after we do this step, it’s ok to display the data on the page.</p>
+            <p>The Romanian government offers, freely, different data sets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. The information extracted from here is minimal that’s why we need the help of DBPedia in achieving an exhaustive search. </p>
+            <h3 id="provenance">PROV Book</h3>
+            <p>Now we have all the data we need, from the data providers mentioned above, but we should also check <b>the provenance of each piece of data</b>. Provenance is a record that describes the people, institutions, entities, and activities, involved in producing, influencing, or delivering a piece of data or a thing in the world. So, only after we do this step, it’s ok to display the data on the page.</p>
         </section>
         <section class="identation" id = "arhitecture">
             <h2>Architecture</h2>
             <h3 id="client">Client</h3>
             <p>The client will be a web interface developed with Angular 5. We choose Angular because of its strong performance. It can be easily deployed on any web server and it offers a large set of tools that ease the development process. 
-            Angular is a client side framework of JavaScript which is based on MVC Architecture and provides a Single-page application solution for dynamic websites. Angular’s strong points are:</p>
+            <b>Angular is a client side framework of JavaScript which is based on MVC Architecture</b> and provides a Single-page application solution for dynamic websites. Angular’s strong points are:</p>
             <ul>
                 <li>Code Re-usability</li>
                 <li>Maintenance of the existing code</li>
@@ -117,8 +119,18 @@
             </ul>
             <p>So, in Angular, code-re usability can be achieved using Modules, Components. It provides the sharing of the code within angular Application. It also Provides ‘Dependency Injection’ (DI) and ‘Angular Routing’ features which provides the re usability of the code again and again. It provides a modular and highly scalable code to enhance the speed of development.</p>
             <h3 id="server">Server</h3>
-                The Spring Framework is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
+                <b>The Spring Framework</b> is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
                 Spring framework provides flexibility to configure beans in multiple ways such as XML, Annotations, and JavaConfig. With the number of features increased the complexity also gets increased and configuring Spring applications becomes tedious and error-prone.</p>
+            <h3 id="database">Database</h3>
+            <p>For persistence we will use <b>PostgreSQL</b>. As the information provided my the Romanian government on heritage is stored in a XML file we will extrac the useful information and store it in a relational database, for easier access and quering.</p>
+            <h3 id="overview">Overview</h3>
+            <figure typeof="sa:image">
+            <img src="./uml.png" height="500px" width="1000px"/>
+            <figcaption>The diagram describes how all the major components are interconnected in the context of the application.</figcaption>
+            </figure>
+            <p>So the application, hosted on a web server will query the relational database (obtained from Gov Data XML) for information about Romanian artistic attractions. As the information provided from this query is limited, the client application will call the DBPedia API to further enrich the information, based on the results from the first query. We could also use Getty Vocabularies instead of DBPedia for gathering this information, but it’s not decided yet.</p>
+
+
         </section>
             <section class="identation" id="bibliography">
             <h2>Bibliography</h2>
@@ -131,11 +143,26 @@
                     </cite>
                 </li>
                 <li typeof="schema:WebPage" role="doc-biblioentry"
-                resource="http://www.provbook.org/"
+                resource="http://vocab.getty.edu/"
                 property="schema:citation">
                     <cite property="schema:name">
+                        <a href="http://vocab.getty.edu/">Getty Vocabularies</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="https://www.w3.org/TR/rdf-sparql-query/"
+                property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://www.w3.org/TR/rdf-sparql-query/">SPARQL 1.1</a>
+                    </cite>, published in
+                    <time property="schema:datePublished" datatype="xsd:gYear" datetime="2013">2013</time>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="http://www.provbook.org/"
+                property="schema:citation">
+                 <cite property="schema:name">
                         <a href="http://www.provbook.org/">PROV Book</a>
-                    </cite>,
+                    </cite>
                     by <span property="schema:author" typeof="schema:Person">
                     <span property="schema:givenName">Luc</span>
                     <span property="schema:familyName">Moreau</span>
@@ -145,16 +172,21 @@
                     <span property="schema:familyName">Groth</span>
                     </span>
                 </li>
-                <li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="https://data.gov.ro/"
+                property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://data.gov.ro/">Data.gov</a>
+                    </cite>
+                </li>
                 
-
             </ul>
             </section>
         </div>
     </body>
     <hr>
     <footer style="text-align: center">
-        <p property="schema:copyrightYear" property="schema:Organization">Copyright © 2017 Faculty of Computer Science, "Alexandru Ioan Cuza" University Iasi</p>
+        <p property="schema:copyrightYear" property="schema:Organization">Copyright © 2017 <a href="http://www.info.uaic.ro/bin/Main/"> Faculty of Computer Science </a>, "Alexandru Ioan Cuza" University Iasi</p>
         <a href="https://github.com/cristian904/WADe---ARK" property="schema:licence" typeof="CreativeWork">Licence</a>
     </footer>
 </html>
