@@ -1,0 +1,17 @@
+{ "museums": [
+                      {
+                        "name" : "Muzeul de Arta",
+                        "position" : {
+                          "latitude" : "23,56",
+                          "longitude" : "34,211"
+                        }
+                      },
+                      {
+                        "name": "Muzeul de Arta",
+                        "position" : {
+                          "latitude" : "23,56",
+                          "longitude" : "34,211"
+                        }
+                      }
+                      ]
+                    }
