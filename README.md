@@ -17,6 +17,11 @@ The data is given by data.gov.ro(http://data.gov.ro/dataset/bunuri-culturale-cla
 - Created OpenAPI yaml for what endpoints are exposed on our API.
 - Visual mockups
 
+28/11/2017
+ - Created Scholarly HTML documentation
+ - Developed Arhitecture Diagram and Use Case diagram
+ - Created Angular Client Boilerplate project
+
 ## Team
 1) Padurariu Constantin Cristian
 2) Silion Dragos
