@@ -83,11 +83,12 @@
                 </li>
                 <li><a href="#workflow">User workflows</a></li>
                 <ol>
-                    <li><a href="#mainPage">Museums</a></li>
-                    <li><a href="#worksOfArt">Works of Art list</a></li>
-                    <li><a href="#mainPage">Work of Art view</a></li>
-                    <li><a href="#mainPage">Artists</a></li>                
+                    <li><a href="#museums">Museums</a></li>
+                    <li><a href="#worksOfArtList">Works of Art list</a></li>
+                    <li><a href="#worksOfArtView">Work of Art view</a></li>
+                    <li><a href="#artists">Artists</a></li>                
                 </ol>
+                <li><a href="#conclusion">Conclusion</a></li>
                 <li><a href="#bibliography">Bibliography</a>
                 </li>
             </ol>
@@ -95,7 +96,7 @@
         <section class="identation" id="introduction" role="doc-introduction">
             <h2>Introduction</h2>
             <p>The report describes the <b>concepts and technologies</b> that will be applied in the development of the project. We will go through the specific APIs and Web Services that will be present in the project, the general architecture of the project that presents the main components/models, but also a general overview that will incorporate all these concepts into one web application. 
-                This projects sets out to offer an <b>intelligent and interactive way of visualizing</b> to visualize relevant and verified data about different works of art available in <b>Romanian museums</b>.
+                This projects sets out to offer an <b>intelligent and interactive way of visualizing</b> relevant and verified data about different works of art available in <b>Romanian museums</b>.
                 The work is being done as part of the <b>Web Application Development</b> course held by  <cite property="schema:name"><a href="https://profs.info.uaic.ro/~busaco/">Conf. Dr. Sabin-Corneliu Buraga</a></cite>, professor at the Faculty of Computer Science in Iasi.
             </p>
         </section>
@@ -109,7 +110,16 @@
             <h3 id="sparql">SPARQL</h3>
             <p>We will access the data provided via DBPedia and Getty Vocabularies via a SPARQL endpoint. SPARQL is <b>RDF query language</b>, that is, a semantic query language for databases, able to retrieve and manipulate data stored in Resource Description Framework (RDF) format. So this will help us execute complex queries and provides an easy way to handle the data.</p>
             <h3 id="govData">Governmental Data</h3>
-            <p>The Romanian government offers, freely, different data sets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. The information extracted from here is minimal that’s why we need the help of DBPedia in achieving an exhaustive search. </p>
+            <p>The Romanian government offers, freely, different data sets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. The information extracted from here is minimal that’s why we need the help of DBPedia in achieving an exhaustive search. Useful information provided for a certain work of art by gov data is:</p>
+            <ul>
+                <li>name</li>
+                <li>museum</li>
+                <li>author</li>
+                <li>size</li>
+                <li>type</li>
+                <li>current</li>
+                <li>description</li>
+            </ul>
             <h3 id="provenance">PROV Book</h3>
             <p>Now we have all the data we need, from the data providers mentioned above, but we should also check <b>the provenance of each piece of data</b>. Provenance is a record that describes the people, institutions, entities, and activities, involved in producing, influencing, or delivering a piece of data or a thing in the world. So, only after we do this step, it’s ok to display the data on the page.</p>
         </section>
@@ -132,42 +142,48 @@
             <p>For persistence we will use <b>PostgreSQL</b>. As the information provided my the Romanian government on heritage is stored in a XML file we will extrac the useful information and store it in a relational database, for easier access and quering.</p>
             <h3 id="overview">Overview</h3>
             <figure typeof="sa:image">
-            <img src="./uml.png" height="500px" width="1000px"/>
-            <figcaption>The diagram describes how all the major components are interconnected in the context of the application.</figcaption>
+            <img src="./img/uml.png"  width="600px"/>
+            <figcaption><i>The diagram describes how all the major components are interconnected in the context of the application</i></figcaption>
             </figure>
-            <p>So the application, hosted on a web server will query the relational database (obtained from Gov Data XML) for information about Romanian artistic attractions. As the information provided from this query is limited, the client application will call the DBPedia API to further enrich the information, based on the results from the first query. We could also use Getty Vocabularies instead of DBPedia for gathering this information, but it’s not decided yet.</p>
+            <p>So the application, hosted on a web server will query the relational database (obtained from <b>Gov Data XML</b>) for information about Romanian artistic attractions. As the information provided from this query is limited, the client application will call the <b>DBPedia API</b> to further enrich the information, based on the results from the first query. We could also use <b>Getty Vocabularies</b> instead of DBPedia for gathering this information, but it’s not decided yet.</p>
+            <p>Every piece of information queried from these sources will be verified using the <b>PROV Book</b> service, to check for their authenticity. The data will finally end up on the client's broswer were it will be displayed appropiatety.
         </section>
         <section class="identation" id = "workflow">
-            <h2> User Workflows</h2>
+            <h2 id="workflow"> User Workflows</h2>
             <p> The whole application revolves around Romanian museums and what works of art can be found in them. It can be used in both exploring what can be found and also specific searches about Works of Art, Museums or Artists.</p>
-            <h3>Museums</h3>
+            <h3 id = "museums">Museums</h3>
             <figure typeof="sa:image">
                 <img src="./img/index.png" width="600px"/>
-                <figcaption>Mockup for the main page</figcaption>
+                <figcaption><i>Mockup for the main page</i></figcaption>
             </figure>
-            <p> The main page is represented by the Romanian Map on which all the museums inside The Romanian Heritage dataset can be find. Their information is updated and completed by DBpedia informations. On clicking on each museum figure, further information is available, including a few statistics and a hyperlink to all the Art Works located here.
-            <h3>Works of Art list</h3>
+            <p> The main page is represented by the <b>Romanian Map</b> on which all the museums inside The Romanian Heritage dataset can be find. Their information is updated and completed by DBpedia informations. On clicking on each museum figure, further information is available, including a few statistics and a hyperlink to all the Art Works located here.
+            <h3 id="workOfArtList">Works of Art list</h3>
             <figure typeof="sa:image">
                 <img src="./img/muzeu.png" width="600px"/>
-                <figcaption>Mockup for how the museum view</figcaption>
+                <figcaption><i>Mockup for how the museum view</i></figcaption>
             </figure>
             <figure typeof="sa:image">
                 <img src="./img/art.png" width="600px"/>
-                <figcaption>Mockup for the Art exploration view</figcaption>
+                <figcaption><i>Mockup for the Art exploration view</i></figcaption>
             </figure>
             <p>Lists with works of art can be accesed in both museum view and All works of art view. They can be filtered by both name and artist's name. On click further information can be achieved. This page also contains hyperlinks to more info about the artists.</p> 
-            <h3>Work of Art view</h3>
+            <h3 id="workOfArtView">Work of Art view</h3>
             <figure typeof="sa:image">
                 <img src="./img/art-modal.png" width="600px"/>
-                <figcaption>Mockup for the Work of Art details modal</figcaption>
+                <figcaption><i>Mockup for the Work of Art details modal</i></figcaption>
             </figure>
             <p> All the information gather from both the gov data and DBpedia is available in this view for a piece of art. Besides that, recommendations are offered for Art in the same time period, same current or artists with resembling style.
             <h3>Artists</h3>  
             <figure typeof="sa:image">
                 <img src="./img/artist-modal.png" width="600px"/>
-                <figcaption>Mockup for the Artist details modal</figcaption>
+                <figcaption><i>Mockup for the Artist details modal</i></figcaption>
             </figure>
             <p> Here, data about artists can be found. Besides pure data, you can access the museums where their works can be find, their paintings and also some statistics.</p>
+        </section>
+        <section class = "identation" id="conclusion" role="doc-conclusion">
+            <h2>Conclusion</h2>
+            In conclusion, this report highlights the the main concepts that will help us in the development of this project. Further, we should investigate in depth every method listed above to try and see what is the best way to combine them in order to achive our goal.
+            So, the idea presented here is a preliminary step that represents our overall, outside the box view, of what this project might look like. 
         </section>
             <section class="identation" id="bibliography">
             <h2>Bibliography</h2>
