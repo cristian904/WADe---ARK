@@ -13,11 +13,14 @@ import { ArtDetailComponent } from './art/art-detail/art-detail.component';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist/artist-detail/artist-detail.component';
 import { RouterModule } from '@angular/router';
+import { ArtListComponent } from './art/art-list/art-list.component';
 
 
 const appRoutes: Routes = [
   { path: 'museum', component: MuseumComponent },
-  { path: 'art', component: ArtComponent },
+  { path: 'art', component: ArtComponent, children: [
+    { path: ':id', component: ArtDetailComponent}
+  ]}, 
   { path: 'artist', component: ArtistComponent}
 ];
 
@@ -32,6 +35,7 @@ const appRoutes: Routes = [
     //Works of art
     ArtComponent,
     ArtDetailComponent,
+    ArtListComponent,
     //Artists
     ArtistComponent,
     ArtistDetailComponent
