@@ -1,0 +1,14 @@
+<h1>Exploreaza arta</h1>
+
+<div>
+    <div class="search-form-item">
+        <label for="name">Nume:</label>
+        <input name="name" type="text">
+    </div>
+    <div class="search-form-item">
+        <label for="year">Anul aparitiei:</label>
+        <input name="year" type="number">
+    </div>
+</div>
+
+<app-art-list [arts] = "arts"></app-art-list>
