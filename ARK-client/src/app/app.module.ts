@@ -14,13 +14,14 @@ import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist/artist-detail/artist-detail.component';
 import { RouterModule } from '@angular/router';
 import { ArtListComponent } from './art/art-list/art-list.component';
+import { ArtItemComponent } from './art/art-list/art-item/art-item.component';
+import { ArtService } from './services/art.service';
 
 
 const appRoutes: Routes = [
   { path: 'museum', component: MuseumComponent },
-  { path: 'art', component: ArtComponent, children: [
-    { path: ':id', component: ArtDetailComponent}
-  ]}, 
+  { path: 'art', component: ArtComponent}, 
+  { path: 'art/:id', component: ArtDetailComponent},
   { path: 'artist', component: ArtistComponent}
 ];
 
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     ArtComponent,
     ArtDetailComponent,
     ArtListComponent,
+    ArtItemComponent,
     //Artists
     ArtistComponent,
     ArtistDetailComponent
@@ -44,7 +46,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ArtService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

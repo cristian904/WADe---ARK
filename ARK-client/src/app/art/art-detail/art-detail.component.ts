@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { Art } from "../../models/Art.model";
 import { ArtService } from "../../services/art.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -13,25 +13,19 @@ export class ArtDetailComponent{
     art: Art;
     similarArt: Art[];
 
-    constructor(private artService: ArtService, private router: Router){}
+    constructor(private artService: ArtService, private route: ActivatedRoute){}
 
     ngOnInit(){
-        this.artService.artWasSelected.subscribe(
-            (art) => {
-                this.art = art;
-                this.similarArt = this.artService.getSimilarArt(art);
-                this.artService.addToPreviousArt(art);
-            }
-        );
+        this.art = this.artService.getArtById(this.route.snapshot.params['id']);
     }
 
     onBackClick(){
-        const art = this.artService.getPreviousArt();
-        if(art != null)
-        {
-            this.art = art;
-            this.router.navigate(['/art', art.id]);
-        }
+        // const art = this.artService.getPreviousArt();
+        // if(art != null)
+        // {
+        //     this.art = art;
+        //     this.router.navigate(['/art', art.id]);
+        // }
     }
 
 }

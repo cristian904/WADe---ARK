@@ -1,5 +1,4 @@
-<ul>
-    <li (click) = "onArtClick(art)" *ngFor="let art of arts">
-     <a >{{art.name}} </a> 
-    </li>
-</ul>
+<div>
+    <app-art-item class="art-list" [art] = "artEl" *ngFor="let artEl of arts"></app-art-item>
+    
+</div>
