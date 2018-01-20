@@ -1,3 +1,23 @@
-<h3>{{art.id}}</h3>
-<button (click) = "onBackClick()">Back</button>
+<div class="detail-item">
+    <div class="detail-item-info">
+        <img src="{{art.imagePath}}">
+    </div>
+    <div class="detail-item-info">
+        <p class = "title">{{art.name}}</p>
+        <p>Autor: {{art.author}}</p>
+        <p>An: {{art.year}}</p>
+        <p>Curent: {{art.current}}</p>
+        <p>Tip: {{art.type}}</p>
+        <p>Dimensiuni: {{art.size.height}} x {{art.size.width}}</p>
+        <p>Descriere: {{art.description}}</p>
+    </div>
+</div>
+<hr>
+<div class="detail-item">
+<p>De la acelasi autor:</p>
 <app-art-list [arts] = "similarArt"></app-art-list>
+</div>
+<div class="detail-item">
+    <p>Din acelasi curent:</p>
+    <app-art-list [arts] = "similarArt"></app-art-list>
+</div>
