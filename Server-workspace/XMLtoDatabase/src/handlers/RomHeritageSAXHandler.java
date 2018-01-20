@@ -7,22 +7,24 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import dao.ArtworkDAO;
 import entity.Artwork;
 
 public class RomHeritageSAXHandler extends DefaultHandler{
 
-	List<Artwork> artworks;
-	Artwork currentArtwork;
+	ArtworkDAO artworkDao;
 	
+	
+	Artwork currentArtwork;
 	String currentElement;
+	int count;
 	
     public void startDocument() throws SAXException {
-		artworks = new ArrayList<>();
+		artworkDao = new ArtworkDAO();
     }
 
     public void endDocument() throws SAXException {
-    	System.out.println("End : ");
-    	System.out.println(this.artworks.size());
+    	System.out.println("End : " + count);
     }
 
     public void startElement(String uri, String localName,
@@ -57,7 +59,9 @@ public class RomHeritageSAXHandler extends DefaultHandler{
     	
     	switch(qName){
 	    	case "lido":{
-	    		artworks.add(currentArtwork);
+	    		count++;
+	    		System.out.println("Added " + currentArtwork.getTitle());
+	    		artworkDao.addToDatabase(currentArtwork);
 	    		break;
 	    	}
     	}
@@ -86,10 +90,12 @@ public class RomHeritageSAXHandler extends DefaultHandler{
         	break;
         }
         case "legalBodyID":{
+        	if(currentArtwork.getRepositoryId() != null) break;
         	currentArtwork.setRepositoryId(element);
         	break;
         }
         case "legalBodyName":{
+        	if(currentArtwork.getRepositoryName() != null) break;
         	currentArtwork.setRepositoryName(element);
         	break;
         }
@@ -107,6 +113,12 @@ public class RomHeritageSAXHandler extends DefaultHandler{
         }
         case "category":{
         	currentArtwork.getCategories().add(element);
+        }
+        case "nameActorSet":{
+        	currentArtwork.setAuthor(element);
+        }
+        case "linkResource":{
+        	currentArtwork.setImageUrl(element);
         }
         }
         

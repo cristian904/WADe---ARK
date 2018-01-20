@@ -8,6 +8,7 @@ public class Artwork {
 	String id;
 	//Object classification
 	String objectOfWork;
+	String author;
 	List<String> classification;
 	List<String> categories;
 	
@@ -17,6 +18,7 @@ public class Artwork {
 	String repositoryName;
 	String description;
 	String measurements;
+	String imageUrl;
 	
 	String displayState;
 	
@@ -36,6 +38,12 @@ public class Artwork {
 	}
 	public void setObjectOfWork(String objectOfWork) {
 		this.objectOfWork = objectOfWork;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	public List<String> getClassification() {
 		return classification;
@@ -76,7 +84,12 @@ public class Artwork {
 	public String getDisplayState() {
 		return displayState;
 	}
-
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	public void setDisplayState(String displayState) {
 		this.displayState = displayState;
 	}
