@@ -7,29 +7,34 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MuseumComponent } from './museum/museum.component';
 import { MuseumDetailComponent } from './museum/museum-detail/museum-detail.component';
-import { StatisticsComponent } from './statistics/statistics.component';
 import { ArtComponent } from './art/art.component';
 import { ArtDetailComponent } from './art/art-detail/art-detail.component';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistDetailComponent } from './artist/artist-detail/artist-detail.component';
 import { RouterModule } from '@angular/router';
 import { ArtListComponent } from './art/art-list/art-list.component';
-import { ArtItemComponent } from './art/art-list/art-item/art-item.component';
 import { ArtService } from './services/art.service';
+import { MuseumService } from './services/museum.service';
+import { ArtistService } from './services/artist.service';
+import { ChartsModule } from 'ng2-charts';
+import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
+import { NgxCarouselModule } from 'ngx-carousel';
 
 
 const appRoutes: Routes = [
   { path: 'museum', component: MuseumComponent },
   { path: 'art', component: ArtComponent}, 
   { path: 'art/:id', component: ArtDetailComponent},
-  { path: 'artist', component: ArtistComponent}
+  { path: 'artist', component: ArtistComponent},
+  { path: 'artist/:id', component: ArtistDetailComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    StatisticsComponent,
+    //Charts
+    PieChartComponent,
     //Museums
     MuseumComponent,
     MuseumDetailComponent,
@@ -37,16 +42,17 @@ const appRoutes: Routes = [
     ArtComponent,
     ArtDetailComponent,
     ArtListComponent,
-    ArtItemComponent,
     //Artists
     ArtistComponent,
     ArtistDetailComponent
   ],
   imports: [
+    NgxCarouselModule,
+    ChartsModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ArtService],
+  providers: [ArtService, MuseumService, ArtistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

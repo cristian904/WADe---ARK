@@ -1,1 +1,22 @@
-<h3>Artist details</h3>
+<div class = "detail-item">
+    <div class="detail-item-info">
+        <img width="250px" height="300px" src="{{artist.imagePath}}" alt = "{{artist.name}}">
+    </div>
+    <div class="detail-item-info">
+        <p class="title">{{artist.name}}</p>
+        <p>Anul nasterii: {{artist.yob}}</p>
+        <p>Curent: {{artist.current}}</p>
+    </div>
+    <div class="detail-item-info">
+        <app-pie-chart></app-pie-chart>
+    </div>
+    <div class="detail-item-info">
+            <app-pie-chart></app-pie-chart>
+        </div>
+</div>
+
+    <app-art-list [arts]="artist.arts"></app-art-list>
+
+<div class="detail-item">
+    
+</div>
