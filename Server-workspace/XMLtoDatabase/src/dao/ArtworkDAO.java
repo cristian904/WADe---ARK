@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import entity.Artwork;
@@ -61,11 +62,60 @@ public class ArtworkDAO {
 		
 	}
 	
+	public int checkAuthorExists(String authorName){
+
+		String SQL = "SELECT id FROM authors"
+				+ " WHERE name = ?";
+		
+		try(Connection conn = pgConn.connect();
+				PreparedStatement stmt = conn.prepareStatement(SQL);
+				){
+			stmt.setString(1, authorName);
+			
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				return rs.getInt(1);
+			}else{
+				return -1;
+			}
+		}catch(SQLException e){
+			System.err.println(e.getMessage());
+			return -1;
+		}
+	}
+	
+	public long addAuthor(String authorName){
+		long id = checkAuthorExists(authorName);
+		
+		if(id != -1) return id;
+
+		String SQL = "INSERT INTO authors (name)"
+				+ " VALUES (?)";
+		
+		try(Connection conn = pgConn.connect();
+				PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+				){
+			stmt.setString(1, authorName);
+			
+			System.out.println("Added author " + authorName);
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			return rs.getLong(1);
+			
+		}catch(SQLException ex){
+			System.err.println(ex.getMessage());
+			return -1;
+		}
+		
+	}
+	
 	public void addToDatabase(Artwork a){
 		addMuseum(a.getRepositoryId(), a.getRepositoryName());
+		long authorId = addAuthor(a.getAuthor());
 		
 		String SQL = "INSERT INTO artworks (recID, object_of_work, classifications, categories"
-				+ ", title, description, measurements, repositoryID, display_state, author, image_url)"
+				+ ", title, description, measurements, repositoryID, display_state, author_id, image_url)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try(Connection conn = pgConn.connect();
@@ -80,7 +130,7 @@ public class ArtworkDAO {
 			stmt.setString(7, a.getMeasurements());
 			stmt.setString(8, a.getRepositoryId());
 			stmt.setString(9, a.getDisplayState());
-			stmt.setString(10,  a.getAuthor());
+			stmt.setLong(10,  authorId);
 			stmt.setString(11,  a.getImageUrl());
 			stmt.executeUpdate();
 		}catch(SQLException ex){

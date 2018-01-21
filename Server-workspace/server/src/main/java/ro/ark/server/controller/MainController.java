@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ro.ark.server.entity.Artwork;
+import ro.ark.server.entity.Author;
 import ro.ark.server.entity.Museum;
 import ro.ark.server.service.ArtworkService;
+import ro.ark.server.service.AuthorService;
+import ro.ark.server.service.DBPediaService;
 import ro.ark.server.service.MuseumService;
 
 @Controller
@@ -21,6 +24,11 @@ public class MainController {
 	MuseumService museumService;
 	@Autowired
 	ArtworkService artworkService;
+	@Autowired
+	AuthorService authorService;
+	
+	@Autowired
+	DBPediaService dbPediaService;
 	
 	@RequestMapping("/helloworld")
 	 public ResponseEntity<String> hello() {
@@ -38,8 +46,15 @@ public class MainController {
 			 @RequestParam(value = "title", required = false) String title,
 			 @RequestParam(value = "author", required = false) String author,
 			 @RequestParam(value = "museum", required = false) String museum){
-		 
-		 
 		 return new ResponseEntity<>(artworkService.getArtwork(title, author, museum), HttpStatus.OK);
+	 }
+	 
+	 @RequestMapping("/author/{id}")
+	 public ResponseEntity<?> getAuthor(@PathVariable Long id){
+		 Author author = authorService.getById(id);
+		 
+		 author = dbPediaService.getAuthorInfo(author.getName());
+		 
+		 return new ResponseEntity<>(author, HttpStatus.OK);
 	 }
 }
