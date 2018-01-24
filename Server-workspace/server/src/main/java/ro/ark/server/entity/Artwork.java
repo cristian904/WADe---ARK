@@ -2,9 +2,12 @@ package ro.ark.server.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -14,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "artworks")
 @NamedQueries({
 	@NamedQuery(name = Artwork.GET_ARTWORK, 
-			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author) LIKE :author AND a.repositoryId IN :museums")
+			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums")
 })
 public class Artwork {
 	public static final String GET_ARTWORK = "getArtwork";
@@ -50,8 +53,9 @@ public class Artwork {
 	@Column(name="display_state")
 	private String displayState;
 	
-	@Column
-	private String author;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="author_id")
+	private Author author;
 	
 	@Column(name="image_url")
 	private String imageUrl;
@@ -136,11 +140,11 @@ public class Artwork {
 		this.displayState = displayState;
 	}
 
-	public String getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 

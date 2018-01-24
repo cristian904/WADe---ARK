@@ -18,25 +18,22 @@ paths:
             application/json:
               examples:
                 foo:
-                  value: {
-                    "museums": [
-                      {
-                        "name" : "Muzeul de Arta",
-                        "position" : {
-                          "latitude" : "23,56",
-                          "longitude" : "34,211"
-                        }
-                      },
-                      {
-                        "name": "Muzeul de Arta",
-                        "position" : {
-                          "latitude" : "23,56",
-                          "longitude" : "34,211"
-                        }
-                      }
-                      ]
+                  value: 
+                  [
+                    {
+                        "id": 517,
+                        "repositoryId": "7300200",
+                        "repositoryName": "Muzeul Național de Artă al României ",
+                        "city": "BUCUREȘTI"
+                    },
+                    {
+                        "id": 518,
+                        "repositoryId": "7026500",
+                        "repositoryName": "Muzeul de Artă ",
+                        "city": "CONSTANȚA"
                     }
-  /art-work:
+                  ]
+  /artworks:
     get:
       description: Retrieve list of artistic works that satisfy some constrains
       parameters:
@@ -60,29 +57,59 @@ paths:
             application/json:
               examples:
                   foo:
-                    value: {
-                      "art-works" : [
+                    value: [
                         {
-                          "name": "Mona Lisa",
-                          "museum": "Muzeul de Arta - Iasi",
-                          "current": "post-neo-iluminism",
-                          "size": "40x30",
-                          "state": "deteriorat",
-                          "description": "Icoana reprezentand ...",
-                          "year": 1666
-                        },
-                        {
-                          "name": "Mona Lisa",
-                          "museum": "Muzeul de Arta - Iasi",
-                          "current": "post-neo-iluminism",
-                          "size": "40x30",
-                          "state": "deteriorat",
-                          "description": "Icoana reprezentand ...",
-                          "year": 1666
+                            "id": 30953,
+                            "recId": "6D697761B1D3414FA7FA05C8251E17EA",
+                            "objectOfWork": "Machetă de monument",
+                            "classifications": "IMAGE,artă plastică,fine arts,Sculptură",
+                            "categories": "E22_Man-Made_Object,artefact,man-made object",
+                            "title": "Biserica mânăstirii Curtea de Argeș",
+                            "description": "Biserica a fost construită în 1512-1517 de către Neagoe Basarab, pe locul vechii mitropolii din 1359, ale cărei picturi interioare au fost terminate în 1526. A fost restaurată de arhitectul francez Andre Lecomte de Nouy, între 1875-1885 care i-a adus și unele modificări.",
+                            "measurements": "122 x 220 x 230 cm",
+                            "repositoryId": "7084103",
+                            "displayState": "relativ bună",
+                            "author": {
+                                "id": 180,
+                                "name": "Storck, Karl",
+                                "placeName": null,
+                                "country": null,
+                                "movementName": [],
+                                "birthDate": null,
+                                "deathDate": null,
+                                "desc": null,
+                                "image": null,
+                                "handler": {},
+                                "hibernateLazyInitializer": {}
+                            },
+                            "imageUrl": "http://clasate.cimec.ro/medium/ARP_7084103_685-1.jpg"
                         }
                       ]
-                    }
-  /artists:
+  /author/{id}:
+    get:
+      description: Get information about an artist from DBPedia
+      responses:
+        '200':
+      content:
+          application/json:
+            examples:
+              foo:
+                value: 
+                  {
+                    "id": 0,
+                    "name": "Tonitza, Nicolae",
+                    "placeName": "Bârlad@en",
+                    "country": "Romania@en",
+                    "movementName": [
+                        "Expressionism@en",
+                        "Post-impressionism@en"
+                    ],
+                    "birthDate": "1886-04-13^^http://www.w3.org/2001/XMLSchema#date",
+                    "deathDate": "1940-2-27^^http://www.w3.org/2001/XMLSchema#date",
+                    "desc": "Nicolae Tonitza (Romanian pronunciation: [nikoˈla.e toˈnit͡sa]; April 13, 1886 – February 27, 1940) was a Romanian painter, engraver, lithographer, journalist and art critic. Drawing inspiration from Post-impressionism and Expressionism, he had a major role in introducing modernist guidelines to local art.@en",
+                    "image": "http://commons.wikimedia.org/wiki/Special:FilePath/TonitzaTonitzacca1923.PNG"
+                }
+  /authors:
     get:
       description: Retrieve a list or artists that satisfy some constrains
       parameters:
