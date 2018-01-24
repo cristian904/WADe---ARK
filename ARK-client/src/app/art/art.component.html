@@ -1,14 +1,49 @@
-<h1>Exploreaza arta</h1>
+    <h1>Exploreaza arta</h1>
 
-<div>
+<div class="search-form">
     <div class="search-form-item">
-        <label for="name">Nume:</label>
+        <label for="name">Nume </label>
         <input name="name" type="text">
     </div>
     <div class="search-form-item">
-        <label for="year">Anul aparitiei:</label>
+            <label for="author">Autor </label>
+            <input name="author" type="text">
+    </div>
+    <div class="search-form-item">
+        <label for="year">Anul aparitiei </label>
         <input name="year" type="number">
     </div>
+    <button class="search-button"> Cauta</button>
 </div>
 
-<app-art-list [arts] = "arts"></app-art-list>
+<div class= "page-controls">
+        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+        </div>
+
+<table id="table">
+    <thead>
+        <tr>
+            <td width="80px">Lucrare</td>
+            <td>Nume</td>
+            <td>Autor</td>
+            <td>An</td>
+            <td>Curent</td>
+            <td width="10px">Detalii</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let art of arts | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }"
+         [routerLink]="['/art']"
+         [queryParams]="{ id: art.id }">
+            <td><img width="80px" height="100px" [src] = "art.imagePath"></td>
+            <td>{{art.name}}</td>
+            <td>{{art.author}}</td>
+            <td>{{art.year}}</td>
+            <td>{{art.current}}</td>
+            <td><a  [routerLink]="['/art', art.id]"><img height="30px" width="30px" src="../../assets/images/detail-icon.png"></a></td>
+        </tr>
+    </tbody>
+</table>
+<div class= "page-controls">
+<pagination-controls  (pageChange)="p = $event"></pagination-controls>
+</div>

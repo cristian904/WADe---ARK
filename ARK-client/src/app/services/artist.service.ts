@@ -16,10 +16,8 @@ export class ArtistService{
 
     constructor(){
         const artService = new ArtService();
-        const museumService = new MuseumService();
         this.artists.forEach(artist => {
             artist.arts = artService.getArts();
-            artist.museums = museumService.getMuseums();
         });
     }
 

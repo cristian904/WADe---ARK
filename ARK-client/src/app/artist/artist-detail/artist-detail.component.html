@@ -3,9 +3,9 @@
         <img width="250px" height="300px" src="{{artist.imagePath}}" alt = "{{artist.name}}">
     </div>
     <div class="detail-item-info">
-        <p class="title">{{artist.name}}</p>
-        <p>Anul nasterii: {{artist.yob}}</p>
-        <p>Curent: {{artist.current}}</p>
+            <p class = "title">{{artist.name}}</p>
+            <p><span class = "detail-names">Autor</span> <span> {{artist.yob}}</span></p>
+            <p><span class = "detail-names">Curent</span> <span> {{artist.current}}</span></p>
     </div>
     <div class="detail-item-info">
         <app-pie-chart></app-pie-chart>
@@ -15,8 +15,6 @@
         </div>
 </div>
 
-    <app-art-list [arts]="artist.arts"></app-art-list>
-
 <div class="detail-item">
-    
+    <app-art-list [arts]="artist.arts"></app-art-list>
 </div>

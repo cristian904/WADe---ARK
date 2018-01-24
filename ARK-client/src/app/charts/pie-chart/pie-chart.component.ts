@@ -12,6 +12,23 @@ export class PieChartComponent{
   public pieChartLabels:string[] = ['Curent1', 'Curent2', 'Curent3'];
   public pieChartData:number[] = [300, 500, 100];
   public pieChartType:string = 'pie';
+   public lineChartColors:Array<any> = [
+    { // grey
+      backgroundColor: 'yellow',
+      borderColor: 'rgba(148,159,177,1)'
+     
+    },
+    { // dark grey
+      backgroundColor: 'green',
+      borderColor: 'rgba(77,83,96,1)'
+     
+    },
+    { // grey
+      backgroundColor: 'blue',
+      borderColor: 'rgba(148,159,177,1)'
+     
+    }
+  ];
  
   // events
   public chartClicked(e:any):void {

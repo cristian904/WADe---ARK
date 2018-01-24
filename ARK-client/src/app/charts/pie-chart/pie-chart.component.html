@@ -4,6 +4,7 @@
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
                 [chartType]="pieChartType"
+                [colors] = "lineChartColors"
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
       </div>

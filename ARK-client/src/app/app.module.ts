@@ -19,7 +19,8 @@ import { ArtistService } from './services/artist.service';
 import { ChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { NgxCarouselModule } from 'ngx-carousel';
-
+import { HttpModule } from '@angular/http';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const appRoutes: Routes = [
   { path: 'museum', component: MuseumComponent },
@@ -47,9 +48,11 @@ const appRoutes: Routes = [
     ArtistDetailComponent
   ],
   imports: [
+    NgxPaginationModule,
     NgxCarouselModule,
     ChartsModule,
     BrowserModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [ArtService, MuseumService, ArtistService],

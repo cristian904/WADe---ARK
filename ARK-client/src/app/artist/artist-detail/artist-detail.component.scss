@@ -7,6 +7,20 @@
     display: flex;
 }
 
+
 .title{
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.subtitles{
     font-size: 20px;
+    font-weight: bold;
+    display: block;
+}
+.detail-names{
+    display: inline-block;
+    min-width: 120px;
+    font-weight: bold;
 }
