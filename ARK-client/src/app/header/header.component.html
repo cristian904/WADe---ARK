@@ -1,5 +1,5 @@
 <div id = "header" class = "header">
-    <div routerLink = "/museum" class = "header-item">Muzee</div>
-    <div routerLink = "/art" class = "header-item">Arta</div>
-    <div routerLink = "/artist" class = "header-item">Artisti</div>
+    <div routerLink = "/museum" class="header-item" [ngClass] = "{activ : tab == 'museum'}" (click)="tab = 'museum'">Muzee</div>
+    <div routerLink = "/art" class="header-item" [ngClass] = "{activ : tab == 'art'}" (click)="tab = 'art'">Arta</div>
+    <div routerLink = "/artist" class="header-item" [ngClass] = "{activ : tab == 'artist'}" (click)="tab = 'artist'">Artisti</div>
 </div>

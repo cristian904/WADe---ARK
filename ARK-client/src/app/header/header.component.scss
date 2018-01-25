@@ -1,11 +1,24 @@
 .header{
     padding-left: 100px;
-    background-color:rgb(110, 106, 106);
+    background-color:grey;
     padding: 10px;
 
 }
 .header-item{
+    position: relative;
     color: white;
-    display: inline;
+    display: inline-block;
     margin-left: 10px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 20px;
+}
+
+.activ{
+    background: #2199e8;
+}
+
+.header-item:hover{
+    cursor: pointer;
 }
