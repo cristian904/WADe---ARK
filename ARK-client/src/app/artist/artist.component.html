@@ -1,1 +1,45 @@
 <h2>Artists</h2>
+
+<div class="search-form">
+    <div class="search-form-item">
+        <label for="name">Nume </label>
+        <input name="name" type="text">
+    </div>
+    <div class="search-form-item">
+            <label for="current">Curent </label>
+            <input name="current" type="text">
+    </div>
+    <div class="search-form-item">
+        <label for="year">Anul aparitiei </label>
+        <input name="year" type="number">
+    </div>
+    <button class="search-button"> Cauta</button>
+</div>
+
+<div class= "page-controls">
+    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <td width="80px">Artist</td>
+            <td>Nume</td>
+            <td>An</td>
+            <td>Curent</td>
+            <td width="10px">Detalii</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let artist of artists | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }">
+            <td><img width="80px" height="100px" [src] = "artist.imagePath"></td>
+            <td>{{artist.name}}</td>
+            <td>{{artist.yob}}</td>
+            <td>{{artist.current}}</td>
+            <td><a  [routerLink]="['/artist', artist.id]"><img height="30px" width="30px" src="../../assets/images/detail-icon.png"></a></td>
+        </tr>
+    </tbody>
+</table>
+<div class= "page-controls">
+<pagination-controls  (pageChange)="p = $event"></pagination-controls>
+</div>
