@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
+import {AgmCoreModule} from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -55,7 +56,10 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDdbqZvUIy46zJr80oldJGLOve1BdO1pt0'
+    })
   ],
   providers: [ArtService, MuseumService, ArtistService],
   bootstrap: [AppComponent]
