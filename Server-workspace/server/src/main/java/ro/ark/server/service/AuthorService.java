@@ -1,5 +1,7 @@
 package ro.ark.server.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,13 @@ public class AuthorService {
 
 	public Author getById(long id){
 		return authorDao.findById(id);
+	}
+
+	public List<Author> getAll(String name, int pageSize, int pageNumber) {
+		return authorDao.getAll(name, pageSize, pageNumber);
+	}
+
+	public int getNumberOfAuthors(String name) {
+		return authorDao.getCount(name);
 	}
 }

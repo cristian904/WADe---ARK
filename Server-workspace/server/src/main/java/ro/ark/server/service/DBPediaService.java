@@ -1,5 +1,9 @@
 package ro.ark.server.service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -14,8 +18,11 @@ import ro.ark.server.entity.Author;
 @Service
 public class DBPediaService {
 
-	public Author getAuthorInfo(String authorName){
+	public Author getAuthorInfo(Author author){
 		String service = "http://dbpedia.org/sparql";
+		List<String> authorNames = Arrays.asList(author.getName().split(","));
+		authorNames = authorNames.stream().map(n -> n.trim()).collect(Collectors.toList());
+		
 		String queryString =
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
 			    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
@@ -24,8 +31,8 @@ public class DBPediaService {
 				 "PREFIX dbpediaO: <http://dbpedia.org/ontology/> " + 
 				 "SELECT DISTINCT ?x ?place_name ?desc ?country_name ?movement_name ?birthDate ?deathDate ?img " + 
 				 "WHERE { " + 
-				 "    ?x rdf:type type:Artist109812338. " + 
-				 "    ?x foaf:name 'Nicolae Tonitza'@en. " + 
+				 "    ?x rdf:type dbpediaO:Artist . " + 
+				 "    ?x foaf:name ?name . " + 
 				 "    ?x dbpediaO:birthPlace ?place. " + 
 				 "    ?x rdfs:comment ?desc. " + 
 				 "    ?place dbpediaO:country ?country. " + 
@@ -38,6 +45,8 @@ public class DBPediaService {
 				 "    ?x foaf:depiction ?img. " + 
 				 "    filter langMatches( lang(?movement_name), 'EN' ) " + 
 				 "    filter langMatches( lang(?desc), 'EN' ) " + 
+				 " 	  filter contains(?name, \"" + authorNames.get(0) + "\") " + 
+				 (authorNames.size() > 1 ? "filter contains(?name, \"" + authorNames.get(1) + "\")" : "") + 
 				 "} " + 
 				 "ORDER BY ?country";
 		Query query = QueryFactory.create(queryString);
@@ -45,11 +54,9 @@ public class DBPediaService {
 		ResultSet rs = qexec.execSelect();
 		try{
 			
-			Author author = new Author();
 			for (; rs.hasNext() ;){
 				QuerySolution soln = rs.nextSolution();
 				
-				author.setName(authorName);
 				if(soln.contains("birthDate"))
 				author.setBirthDate(soln.get("birthDate").toString());
 				if(soln.contains("deathDate"))
@@ -73,6 +80,5 @@ public class DBPediaService {
 		}finally{
 			qexec.close();
 		}
-		
 	}
 }
