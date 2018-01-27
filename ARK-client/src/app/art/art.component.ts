@@ -26,8 +26,23 @@ export class ArtComponent implements OnInit{
 
     ngOnInit(){
         this.arts = this.artService.getArts();
+        this.getArtsForPage();
     }
 
+    pageChange(event){
+        console.log(this.p);
+        this.p = event;
+        this.getArtsForPage();
+        
+    }
+
+    getArtsForPage(){
+        this.artService.getArtsForPage(this.p, this.pageSize).subscribe( (response) =>{
+            response = response.json();
+            this.total = response["numberOfArtworks"];
+            console.log(response);
+        }  
+        );
+    }
     
-  
 }
