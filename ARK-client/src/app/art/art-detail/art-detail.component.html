@@ -1,6 +1,6 @@
 <div id="top" class="detail-item">
     <div class="detail-item-info">
-        <img src="{{art.imagePath}}">
+        <img [src]="art.imagePath" class = "image">
     </div>
     <div class="detail-item-info">
         <p class = "title">{{art.name}}</p>
@@ -9,7 +9,7 @@
         <p><span class = "detail-names">Curent</span> <span> {{art.current}}</span></p>
         <p><span class = "detail-names">Tip</span> <span> {{art.type}}</span></p>
         <p><span class = "detail-names">Dimensiuni</span> <span> {{art.size.height}} x {{art.size.width}} </span></p>
-        <p><span class = "detail-names">Descriere</span> <span>{{art.description}}</span></p>
+        <p><span id = "description" class = "detail-names">Descriere</span> <span>{{art.description}}</span></p>
     </div>
 </div>
 <hr>

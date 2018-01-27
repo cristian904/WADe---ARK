@@ -17,9 +17,8 @@
 </div>
 
 <div class= "page-controls">
-        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
-        </div>
-
+    <pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
 <table>
     <thead>
         <tr>
@@ -32,9 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr  *ngFor="let art of arts | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }"
-         [routerLink]="['/art']"
-         [queryParams]="{ id: art.id }">
+        <tr  *ngFor="let art of arts | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }">
             <td><img width="80px" height="100px" [src] = "art.imagePath"></td>
             <td>{{art.name}}</td>
             <td>{{art.author}}</td>
@@ -45,5 +42,5 @@
     </tbody>
 </table>
 <div class= "page-controls">
-<pagination-controls  (pageChange)="pageChange($event)"></pagination-controls>
+<pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
