@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
@@ -16,10 +17,11 @@ import { ArtListComponent } from './art/art-list/art-list.component';
 import { ArtService } from './services/art.service';
 import { MuseumService } from './services/museum.service';
 import { ArtistService } from './services/artist.service';
-import { ChartsModule } from 'ng2-charts';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { NgxCarouselModule } from 'ngx-carousel';
-
+import { HttpModule } from '@angular/http';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const appRoutes: Routes = [
   { path: 'museum', component: MuseumComponent },
@@ -47,9 +49,12 @@ const appRoutes: Routes = [
     ArtistDetailComponent
   ],
   imports: [
+    NgxPaginationModule,
     NgxCarouselModule,
-    ChartsModule,
+    NgxChartsModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [ArtService, MuseumService, ArtistService],

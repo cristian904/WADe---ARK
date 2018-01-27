@@ -8,17 +8,43 @@ import { Component } from "@angular/core";
 })
 export class PieChartComponent{
 
-    // Pie
-  public pieChartLabels:string[] = ['Curent1', 'Curent2', 'Curent3'];
-  public pieChartData:number[] = [300, 500, 100];
-  public pieChartType:string = 'pie';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
+  single = [
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    }
+  ];
+
+  multi: any[];
+
+  view: any[] = [700, 400];
+
+  // options
+  showLegend = false;
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
+  // pie
+  showLabels = true;
+  explodeSlices = false;
+  doughnut = false;
+
+  
+
+  constructor() {
   }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
+  
+  onSelect(event) {
+    console.log(event);
   }
 }

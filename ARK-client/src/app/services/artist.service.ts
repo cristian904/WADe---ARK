@@ -3,9 +3,11 @@ import { Museum } from "../models/Museum.model";
 import { Art } from "../models/Art.model";
 import { ArtService } from "./art.service";
 import { MuseumService } from "./museum.service";
+import { Http } from "@angular/http";
+import { Injectable } from "@angular/core";
 
 
-
+@Injectable()
 export class ArtistService{
 
     private artists : Artist[] =[
@@ -14,14 +16,7 @@ export class ArtistService{
         new Artist(2, "Stefan Luchian", 1868, "Impresionism", new Array<Museum>(), new Array<Art>(), "https://upload.wikimedia.org/wikipedia/commons/2/21/Self-Portrait_Stefan_Luchian.jpg")
     ];
 
-    constructor(){
-        const artService = new ArtService();
-        const museumService = new MuseumService();
-        this.artists.forEach(artist => {
-            artist.arts = artService.getArts();
-            artist.museums = museumService.getMuseums();
-        });
-    }
+    constructor(private http: Http){}
 
     getArtists(){
         return this.artists.slice();

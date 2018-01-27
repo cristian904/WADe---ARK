@@ -1,7 +1,10 @@
 import { Art } from "../models/Art.model";
 import { Dimensions } from "../models/Dimensions.model";
-import { EventEmitter, Output } from "@angular/core";
+import { EventEmitter, Output, Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import { APP_CONSTANTS } from "../constants";
 
+@Injectable()
 export class ArtService{
     public artWasSelected = new EventEmitter<Art>();
 
@@ -16,7 +19,7 @@ export class ArtService{
         new Art(7, "Evanghelistul Matei8","Nicolae Grigorescu", 1900, "pictura", "modernist", "Pictura modernista", new Dimensions(10, 20), "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Nicolae_Grigorescu_-_Icoana_Evanghelistului_Matei_de_la_biserica_din_Baicoi.jpg/195px-Nicolae_Grigorescu_-_Icoana_Evanghelistului_Matei_de_la_biserica_din_Baicoi.jpg")
     ];
 
-    private previousArts: Art[] = [];
+    constructor(private http: Http){}
 
     getArts(){
         return this.arts.slice();
@@ -27,7 +30,18 @@ export class ArtService{
     }
 
     getArtById(id){
+        this.http.get(APP_CONSTANTS + "/artworks").subscribe(
+            (response) => {
+                console.log(response.json());
+            }
+        );
         return this.arts.filter(art => art.id == id)[0];
     }
+
+    getArtsForPage(pageNo, pageSize){
+
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?pageNumber=${pageNo}&pageSize=${pageSize}`);
+    }
+
 
 }
