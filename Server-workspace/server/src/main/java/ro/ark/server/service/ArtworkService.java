@@ -20,11 +20,20 @@ public class ArtworkService {
 	@Autowired
 	MuseumDao museumDao;
 	
-	public List<Artwork> getArtwork(String title, String author, String museum) {
+	public List<Artwork> getArtwork(String title, String author, String museum, int pageSize, int pageNumber) {
 		List<Museum> museums = museumDao.getAll(museum);
-		
 		List<String> museumIds = museums.stream().map(m -> m.getRepositoryId()).collect(Collectors.toList());
-		return artworkDao.get(title, author, museumIds);
+		return artworkDao.get(title, author, museumIds, pageSize, pageNumber);
+	}
+
+	public int getNumberOfArtworks(String title, String author, String museum) {
+		List<Museum> museums = museumDao.getAll(museum);
+		List<String> museumIds = museums.stream().map(m -> m.getRepositoryId()).collect(Collectors.toList());
+		return artworkDao.getCount(title, author, museumIds);
+	}
+
+	public Artwork getSingleArtwork(Long id) {
+		return artworkDao.getSingle(id);
 	}
 
 }

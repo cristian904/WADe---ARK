@@ -17,10 +17,13 @@ import javax.persistence.Table;
 @Table(name = "artworks")
 @NamedQueries({
 	@NamedQuery(name = Artwork.GET_ARTWORK, 
-			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums")
+			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums"),
+	@NamedQuery(name = Artwork.GET_ARTWORK_COUNT, 
+	query = "SELECT count(a.id) FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums"),
 })
 public class Artwork {
 	public static final String GET_ARTWORK = "getArtwork";
+	public static final String GET_ARTWORK_COUNT = "getArtworkCount";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
