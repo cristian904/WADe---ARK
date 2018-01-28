@@ -5,19 +5,17 @@
     <div class="detail-item-info">
         <p class = "title">{{art.name}}</p>
         <p><span class = "detail-names">Autor</span> <span> {{art.author}}</span></p>
-        <p><span class = "detail-names">An</span> <span> {{art.year}}</span></p>
-        <p><span class = "detail-names">Curent</span> <span> {{art.current}}</span></p>
         <p><span class = "detail-names">Tip</span> <span> {{art.type}}</span></p>
-        <p><span class = "detail-names">Dimensiuni</span> <span> {{art.size.height}} x {{art.size.width}} </span></p>
-        <p><span id = "description" class = "detail-names">Descriere</span> <span>{{art.description}}</span></p>
+        <p><span class = "detail-names">Dimensiuni</span> <span> {{art.size}} </span></p>
+        <p><span id = "description" class = "detail-names">Descriere</span> <span>{{art.description}}</span> <span title = "{{fullDescription}}"><i><u>  Detalii</u></i></span></p>
     </div>
 </div>
 <hr>
 <div class="detail-item">
-    <p class = "subtitles">De la acelasi autor</p>
-    <app-art-list [arts] = "similarArt"></app-art-list>
+    <p class = "subtitles">Alte lucrari ale artistului {{art.author}}</p>
+    <app-art-list [arts] = "artByArtist"></app-art-list>
 </div>
 <div class="detail-item">
-    <p class = "subtitles">Din acelasi curent</p>
-    <app-art-list [arts] = "similarArt"></app-art-list>
+    <p class = "subtitles">Din acelasi muzeu mai puteti vizita</p>
+    <app-art-list [arts] = "artByMuseum"></app-art-list>
 </div>

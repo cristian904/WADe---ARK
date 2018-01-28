@@ -2,6 +2,7 @@ import { Museum } from "../models/Museum.model";
 import { Position } from "../models/Position.model";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from "@angular/core";
+import { APP_CONSTANTS } from "../constants";
 
 @Injectable()
 export class MuseumService{
@@ -15,17 +16,6 @@ export class MuseumService{
     constructor(private http: Http){}
 
     getMuseums(){
-        this.museums.forEach(
-            (museum) => {
-                const address = museum.name.split(" ").reduce((acc, w) => acc + w + "+", "") + museum.location;
-                this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyDXovFS3_Dy5AVKuWF9jY4iUHaOAX-00zU")
-                .subscribe((response) => {
-                    const lat = response.json().results[0].geometry.location.lat;
-                    const lng =  response.json().results[0].geometry.location.lng;
-                });
-            }
-        );
-        
-        return this.museums.slice();
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/museums`);
     }
 }

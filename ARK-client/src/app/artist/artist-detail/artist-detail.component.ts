@@ -4,6 +4,8 @@ import { ArtistService } from "../../services/artist.service";
 import { OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxCarousel } from 'ngx-carousel';
+import { Art } from "../../models/Art.model";
+import { ArtService } from "../../services/art.service";
 
 @Component({
     selector: 'app-artist-detail',
@@ -15,11 +17,27 @@ export class ArtistDetailComponent implements OnInit{
 
     
     artist: Artist;
+    artsFromArtists : Art[];
 
-    constructor(private artistService: ArtistService, private route: ActivatedRoute){}
+    constructor(private artistService: ArtistService, private artService:ArtService, private route: ActivatedRoute){}
 
     ngOnInit(){
-        this.artist = this.artistService.getArtistById(this.route.snapshot.params['id']);
+        // this.artist = this.artistService.getArtistById(this.route.snapshot.params['id']);
+        this.route.params.subscribe(
+            params => {
+                this.artistService.getArtistById(params['id']).subscribe((response) => {
+                    const artist = response.json();
+                    this.artist =  new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[1], artist.deathDate, artist.image);
+                    this.getArtsByArtist();
+                });
+            }
+        );
 
+    }
+    getArtsByArtist(){
+        this.artService.getArtsByArtist(this.artist.name, 0, 30).subscribe( (response) =>{
+            response = response.json();
+            this.artsFromArtists = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, 1900, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
+        });
     }
 }

@@ -11,9 +11,10 @@ export class Art{
     public description: string;
     public size: string;
     public imagePath: string;
-    public state: string
+    public state: string;
+    public museumId: number;
 
-    constructor(id: number, name: string, author: string, year:number, type: string, current: string, description: string, size: string, imagePath: string, state: string){
+    constructor(id: number, name: string, author: string, year:number, type: string, current: string, description: string, size: string, imagePath: string, state: string, museumId: number){
         this.id = id;
         this.author = author;
         this.name = name;
@@ -24,5 +25,6 @@ export class Art{
         this.type = type;
         this.imagePath = imagePath;
         this.state = state;
+        this.museumId = museumId;
     }
 }

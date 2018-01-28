@@ -20,7 +20,7 @@ export class ArtListComponent implements OnInit{
     ngOnInit(){
         this.carouselTile = {
             grid: {xs: 2, sm: 3, md: 3, lg: 5, all: 0},
-            slide: 2,
+            slide: 4,
             speed: 600,
             animation: 'lazy',
             point: {
