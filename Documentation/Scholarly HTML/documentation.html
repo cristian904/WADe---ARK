@@ -15,7 +15,7 @@
     <meta property="schema:accessibilityFeature" content="MathML">
     <meta property="schema:accessibilityHazard" content="noFlashingHazard">
     </article>
-    <section typeof="sa:AuthorsList">
+    <section style="width: 700px;margin: auto" typeof="sa:AuthorsList">
     <h2>Authors</h2>
     <ul>
         <li typeof="sa:ContributorRole" property="schema:author">
@@ -68,7 +68,7 @@
                         <li><a href="#gettyVocabularies">Getty Vocabularies</a></li>
                         <li><a href="#sparql">SPARQL</a></li>
                         <li><a href="#govData">Governmental Data</a></li>
-                        <li><a href="#provenance">PROV Book</a></li>
+                        <li><a href="#locationAPI">Google APIs</a></li>
                     </ol>
                 </li>
                 <li><a href="#arhitecture">Architecture</a>
@@ -122,8 +122,8 @@
                 <li>current</li>
                 <li>description</li>
             </ul>
-            <h3 id="provenance">PROV Book</h3>
-            <p>Now we have all the data we need, from the data providers mentioned above, but we should also check <b>the provenance of each piece of data</b>. Provenance is a record that describes the people, institutions, entities, and activities, involved in producing, influencing, or delivering a piece of data or a thing in the world. So, only after we do this step, it’s ok to display the data on the page.</p>
+            <h3 id = "locationAPI">Google APIs</h3>
+            <p>Pentru a vizualiza intr-o maniera interactiva muzeele din Romania am construit, cu ajutor API-ului oferit de Google (Places), o harta a tuturor locatiilor acestor atractii culturale. Am obtinut latitudinea si longitudinea muzeele puse la dispozitie prin intermediul Gov Data. De asemenea am utilizat ul alt API-ul oferit de Google (Maps) si pentru afisarea unei harti ce cuprinde toate aceste locatii.</p>
         </section>
         <section class="identation" id = "arhitecture">
             <h2>Architecture</h2>
@@ -141,24 +141,24 @@
                 <b>The Spring Framework</b> is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
                 Spring framework provides flexibility to configure beans in multiple ways such as XML, Annotations, and JavaConfig. With the number of features increased the complexity also gets increased and configuring Spring applications becomes tedious and error-prone.</p>
             <h3 id="database">Database</h3>
-            <p>For persistence we will use <b>PostgreSQL</b>. As the information provided my the Romanian government on heritage is stored in a XML file we will extrac the useful information and store it in a relational database, for easier access and quering.</p>
+            <p>For persistence we will use <b>PostgreSQL</b>. As the information provided my the Romanian government on heritage is stored in a XML file we will extract the useful information and store it in a relational database, for easier access and quering.</p>
             <h3 id="overview">Overview</h3>
             <figure typeof="sa:image">
             <img src="./img/uml.png"  width="600px"/>
             <figcaption><i>The diagram describes how all the major components are interconnected in the context of the application</i></figcaption>
             </figure>
             <p>So the application, hosted on a web server will query the relational database (obtained from <b>Gov Data XML</b>) for information about Romanian artistic attractions. As the information provided from this query is limited, the client application will call the <b>DBPedia API</b> to further enrich the information, based on the results from the first query. We could also use <b>Getty Vocabularies</b> instead of DBPedia for gathering this information, but it’s not decided yet.</p>
-            <p>Every piece of information queried from these sources will be verified using the <b>PROV Book</b> service, to check for their authenticity. The data will finally end up on the client's broswer were it will be displayed appropiatety.
+            
         </section>
         <section class="identation" id = "workflow">
             <h2 id="workflow"> User Workflows</h2>
-            <p> The whole application revolves around Romanian museums and what works of art can be found in them. It can be used in both exploring what can be found and also specific searches about Works of Art, Museums or Artists.</p>
+            <p> The whole application revolves around Romanian museums and what works of art can be found in them. It can be used in both exploring generic information and statistics and also specific searches about Works of Art, Museums or Artists.</p>
             <h3 id = "museums">Museums</h3>
             <figure typeof="sa:image">
                 <img src="./img/index.png" width="600px"/>
                 <figcaption><i>Mockup for the main page</i></figcaption>
             </figure>
-            <p> The main page is represented by the <b>Romanian Map</b> on which all the museums inside The Romanian Heritage dataset can be find. Their information is updated and completed by DBpedia informations. On clicking on each museum figure, further information is available, including a few statistics and a hyperlink to all the Art Works located here.
+            <p> The main page is represented by the <b>Romanian Map</b> on which all the museums inside The Romanian Heritage dataset can be found. Their information is updated and completed by DBpedia informations. On clicking on each museum figure, further information is available, including a few statistics and a hyperlink to all the Art Works located here.
             <h3 id="workOfArtList">Works of Art list</h3>
             <figure typeof="sa:image">
                 <img src="./img/muzeu.png" width="600px"/>
@@ -180,7 +180,7 @@
                 <img src="./img/artist-modal.png" width="600px"/>
                 <figcaption><i>Mockup for the Artist details modal</i></figcaption>
             </figure>
-            <p> Here, data about artists can be found. Besides pure data, you can access the museums where their works can be find, their paintings and also some statistics.</p>
+            <p> Here, data about artists can be found. Besides pure data, you can access the museums where their works can be found, their paintings and also some statistics.</p>
         </section>
         <section class = "identation" id="conclusion" role="doc-conclusion">
             <h2>Conclusion</h2>
@@ -191,12 +191,41 @@
             <h2>Bibliography</h2>
             <ul>
                 <li typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://spring.io/"
+                    property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://spring.io/">Spring Framework</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://angular.io/"
+                    property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://angular.io/">Angular</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="https://developers.google.com/places/"
+                property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://developers.google.com/places/">Google Places API</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="https://developers.google.com/maps/"
+                property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://developers.google.com/maps/">Google Maps API</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
                 resource="http://wiki.dbpedia.org/"
                 property="schema:citation">
                     <cite property="schema:name">
                         <a href="http://wiki.dbpedia.org/">DBPedia</a>
                     </cite>
                 </li>
+                
                 <li typeof="schema:WebPage" role="doc-biblioentry"
                 resource="http://vocab.getty.edu/"
                 property="schema:citation">
@@ -211,21 +240,6 @@
                         <a href="https://www.w3.org/TR/rdf-sparql-query/">SPARQL 1.1</a>
                     </cite>, published in
                     <time property="schema:datePublished" datatype="xsd:gYear" datetime="2013">2013</time>
-                </li>
-                <li typeof="schema:WebPage" role="doc-biblioentry"
-                resource="http://www.provbook.org/"
-                property="schema:citation">
-                 <cite property="schema:name">
-                        <a href="http://www.provbook.org/">PROV Book</a>
-                    </cite>
-                    by <span property="schema:author" typeof="schema:Person">
-                    <span property="schema:givenName">Luc</span>
-                    <span property="schema:familyName">Moreau</span>
-                    </span> and
-                    <span property="schema:author" typeof="schema:Person">
-                    <span property="schema:givenName">Paul</span>
-                    <span property="schema:familyName">Groth</span>
-                    </span>
                 </li>
                 <li typeof="schema:WebPage" role="doc-biblioentry"
                 resource="https://data.gov.ro/"

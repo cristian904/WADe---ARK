@@ -1,20 +1,21 @@
-<img height="500px" width="700px" src="../../assets/images/map.png">
-<app-museum-detail></app-museum-detail>
 <agm-map class="google-map"
-    [latitude]="46"
-    [longitude]="25"
-    [zoom]="7"> 
-    <agm-marker 
-    *ngFor="let m of markers; let i = index"
-    [latitude]="m.lat"
-    [longitude]="m.long"
-    >
-    
-    <agm-info-window>
-        <strong>{{m.name}}</strong>
-        <a [attr.href]="'/museum/' + m.id">Go To Museum</a>
-    </agm-info-window>
-  
+[latitude]="46"
+[longitude]="25"
+[zoom]="7"> 
+<agm-marker 
+*ngFor="let m of markers; let i = index"
+[latitude]="m.lat"
+[longitude]="m.long"
+>
+
+<agm-info-window>
+    <strong>{{m.name}}</strong>
+    <a [attr.href]="'/museum/' + m.id">Go To Museum</a>
+</agm-info-window>
+
 </agm-marker>
 
 </agm-map>
+
+
+<app-museum-detail></app-museum-detail>
