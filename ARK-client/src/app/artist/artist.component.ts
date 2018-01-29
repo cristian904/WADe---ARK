@@ -58,6 +58,7 @@ export class ArtistComponent{
             response = response.json();
             this.total = response["numberOfAuthors"];
             this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[0], artist.deathDate, artist.image));
+            console.log(this.artists);
         });
     }
 

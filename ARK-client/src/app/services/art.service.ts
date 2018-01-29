@@ -26,6 +26,6 @@ export class ArtService{
     }
 
     getArtsBySearch(name, author, pageNo, pageSize){
-        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?pageNumber=${pageNo}&pageSize=${pageSize}&name=${name}&author=${author}`);
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?pageNumber=${pageNo}&pageSize=${pageSize}&title=${name}&author=${author}`);
     }
 }

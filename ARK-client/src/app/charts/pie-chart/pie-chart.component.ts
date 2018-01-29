@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 
 
@@ -8,24 +8,12 @@ import { Component } from "@angular/core";
 })
 export class PieChartComponent{
 
-  single = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
+  @Input()
+  single: any[];
 
   multi: any[];
 
-  view: any[] = [700, 400];
+  view: any[] = [600, 500];
 
   // options
   showLegend = false;

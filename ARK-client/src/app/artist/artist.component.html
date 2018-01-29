@@ -15,12 +15,14 @@
 <table>
     <thead>
         <tr>
+            <td>Artist</td>
             <td>Nume</td>
             <td width="10px">Detalii</td>
         </tr>
     </thead>
     <tbody>
         <tr  *ngFor="let artist of artists | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }">
+                <td><img width="80px" height="100px" [src] = "artist.imagePath"></td>
             <td>{{artist.name}}</td>
             <td><a  [routerLink]="['/artist', artist.id]"><img height="30px" width="30px" src="../../assets/images/detail-icon.png"></a></td>
         </tr>

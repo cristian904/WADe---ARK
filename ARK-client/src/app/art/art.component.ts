@@ -52,7 +52,6 @@ export class ArtComponent implements OnInit{
     onSubmit(form: NgForm){
         this.form = form;
         this.formSubmited = true;
-        console.log(form.value.searchName);
         this.p = 1;
         this.getArtsForSearch(form.value.searchName, form.value.searchAuthor);
         this.router.navigate(['/arts'], {  queryParams: {pageNumber : this.p, pageSize: this.pageSize} });
