@@ -14,10 +14,9 @@ import { ArtService } from "../../services/art.service";
 })
 export class ArtistDetailComponent implements OnInit{
 
-
-    
     artist: Artist;
     artsFromArtists : Art[];
+
 
     constructor(private artistService: ArtistService, private artService:ArtService, private route: ActivatedRoute){}
 

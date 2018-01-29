@@ -26,7 +26,7 @@
             <td>Nume</td>
             <td>Autor</td>
             <td>An</td>
-            <td>Curent</td>
+            <td>Tip</td>
             <td width="10px">Detalii</td>
         </tr>
     </thead>
@@ -35,8 +35,8 @@
             <td><img width="80px" height="100px" [src] = "art.imagePath"></td>
             <td>{{art.name}}</td>
             <td>{{art.author}}</td>
-            <td>{{art.year}}</td>
-            <td>{{art.current}}</td>
+            <td *ngIf = "art.year != 0">{{art.year}}</td><td *ngIf = "art.year == 0">not available</td>
+            <td>{{art.type}}</td>
             <td><a  [routerLink]="['/art', art.id]"><img height="30px" width="30px" src="../../assets/images/detail-icon.png"></a></td>
         </tr>
     </tbody>

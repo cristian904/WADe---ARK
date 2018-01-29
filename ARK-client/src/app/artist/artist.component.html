@@ -17,7 +17,7 @@
 </div>
 
 <div class= "page-controls">
-    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
 
 <table>
@@ -41,5 +41,5 @@
     </tbody>
 </table>
 <div class= "page-controls">
-<pagination-controls  (pageChange)="p = $event"></pagination-controls>
+<pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
 </div>

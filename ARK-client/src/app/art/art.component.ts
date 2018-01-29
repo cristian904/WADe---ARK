@@ -35,14 +35,14 @@ export class ArtComponent implements OnInit{
     }
 
     onPageChange(event){
-        this.router.navigate(['/art'], {  queryParams: {pageNumber : event, pageSize: this.pageSize} });
+        this.router.navigate(['/arts'], {  queryParams: {pageNumber : event, pageSize: this.pageSize} });
     }
 
     getArtsForPage(){
         this.artService.getArtsForPage(this.p, this.pageSize).subscribe( (response) =>{
             response = response.json();
             this.total = response["numberOfArtworks"];
-            this.arts = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, 1900, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
+            this.arts = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
             console.log(response);
         });
     }

@@ -26,6 +26,11 @@ export class ArtistComponent{
         });
         this.getArtistsForPage();
     }
+
+    onPageChange(event){
+        this.router.navigate(['/artists'], {  queryParams: {pageNumber : event, pageSize: this.pageSize} });
+    }
+
     getArtistsForPage(){
         this.artistService.getArtistForPage(this.p, this.pageSize).subscribe( (response) =>{
             response = response.json();

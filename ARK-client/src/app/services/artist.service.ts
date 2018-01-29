@@ -24,7 +24,6 @@ export class ArtistService{
     }
     getArtistById(id){
         return this.http.get(`${APP_CONSTANTS.ENDPOINT}/author/${id}`);
-        // return this.artists.filter(art => art.id == id)[0];
     }
 
     getArtistForPage(pageNo, pageSize){

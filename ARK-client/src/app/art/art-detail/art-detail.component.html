@@ -4,7 +4,8 @@
     </div>
     <div class="detail-item-info">
         <p class = "title">{{art.name}}</p>
-        <p><span class = "detail-names">Autor</span> <span> {{art.author}}</span></p>
+        <p><span class = "detail-names">Autor</span> <span> <a  [routerLink] = "['/artist', authorId]">{{art.author}}</a></span></p>
+        <p><span class = "detail-names">Anul aparitiei</span> <span *ngIf = "art.year != 0"> {{art.year}}</span><span *ngIf = "art.year == 0">not availabe</span></p>
         <p><span class = "detail-names">Tip</span> <span> {{art.type}}</span></p>
         <p><span class = "detail-names">Dimensiuni</span> <span> {{art.size}} </span></p>
         <p><span id = "description" class = "detail-names">Descriere</span> <span>{{art.description}}</span> <span title = "{{fullDescription}}"><i><u>  Detalii</u></i></span></p>

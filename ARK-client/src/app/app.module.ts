@@ -23,24 +23,30 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { NgxCarouselModule } from 'ngx-carousel';
 import { HttpModule } from '@angular/http';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { HomeComponent } from './home/home.component';
+import { MuseumGalleryComponent } from './museum/museum-gallery/museum-gallery.component';
 
 const appRoutes: Routes = [
-  { path: 'museum', component: MuseumComponent },
-  { path: 'art', component: ArtComponent}, 
+  { path: '', component: HomeComponent},
+  { path: 'museums', component: MuseumComponent, children: [{ path:':id', component: MuseumDetailComponent }]},
+  { path: 'museum/:id', component: MuseumGalleryComponent},
+  { path: 'arts', component: ArtComponent}, 
   { path: 'art/:id', component: ArtDetailComponent},
-  { path: 'artist', component: ArtistComponent},
+  { path: 'artists', component: ArtistComponent},
   { path: 'artist/:id', component: ArtistDetailComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     HeaderComponent,
     //Charts
     PieChartComponent,
     //Museums
     MuseumComponent,
     MuseumDetailComponent,
+    MuseumGalleryComponent,
     //Works of art
     ArtComponent,
     ArtDetailComponent,
