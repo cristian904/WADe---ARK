@@ -9,7 +9,7 @@ info:
 host: api.uber.com
 # array of all schemes that your API supports
 schemes:
-  - https
+  - http
 # will be prefixed to all paths
 basePath: /v1
 produces:
@@ -27,6 +27,44 @@ paths:
               $ref: '#/definitions/Museum'
         default:
           description: unexpected error
+  /museums/total-count:
+      get:
+        description: Get total number of museums on ARK
+        responses:
+          200:
+            description: Get number of museums
+            schema:
+              type: number
+  /museum/id/group-by/object-of-work:
+      get:
+        description: Get number of artworks in museum grouped by Object of Work
+        responses:
+          200:
+            description: Get number of artworks in museum grouped by Object of Work
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/NameValue'
+  /museum/id/group-by/state:
+      get:
+        description: Get number of artworks in museum grouped by Display State
+        responses:
+          200:
+            description: Get number of artworks in museum grouped by Display State
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/NameValue'
+  /museum/id/group-by/author:
+      get:
+        description: Get number of artworks in museum grouped by Author
+        responses:
+          200:
+            description: Get number of artworks in museum grouped by Author
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/IdNameValue'
   /artworks:
     get:
       description: Retrieve list of artistic works that satisfy the constrains
@@ -72,6 +110,14 @@ paths:
           description: ID not found
         default:
           description: Unexpected Error
+  /artworks/total-count:
+      get:
+        description: Get total number of Artworks on ARK
+        responses:
+          200:
+            description: Get number of Artworks
+            schema:
+              type: number
   /author:
     get:
       description: Get Information about certain author
@@ -84,6 +130,14 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/AuthorLong'
+  /authors/total-count:
+      get:
+        description: Get total number of Authors on ARK
+        responses:
+          200:
+            description: Get number of Authors
+            schema:
+              type: number
   /authors:
     get:
       description: Retrieve list of art authors that respect constraints
@@ -104,6 +158,26 @@ paths:
             $ref: '#/definitions/Authors'
         default:
           description: Unexpected Error
+  /author/id/group-by/object-of-work:
+      get:
+        description: Get number of artworks of Author grouped by Object Of Work
+        responses:
+          200:
+            description: Get number of artworks of Author grouped by Object Of Work
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/NameValue'
+  /author/id/group-by/museum:
+      get:
+        description: Get number of artworks of Author grouped by Museum
+        responses:
+          200:
+            description: Get number of artworks of Author grouped by Museum
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/StringIdNameValue'
         
       
 definitions:
@@ -187,4 +261,29 @@ definitions:
         type: string
       image:
         type: string
+  NameValue:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: number
+  IdNameValue:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      value:
+        type: number
+  StringIdNameValue:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: number
       
