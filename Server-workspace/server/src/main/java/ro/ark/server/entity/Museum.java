@@ -12,10 +12,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "museums")
 @NamedQueries({
-	@NamedQuery(name = Museum.GET_ALL, query = "SELECT m FROM Museum m WHERE UPPER(m.repositoryName) LIKE :name ")
+	@NamedQuery(name = Museum.GET_ALL, query = "SELECT m FROM Museum m WHERE UPPER(m.repositoryName) LIKE :name "),
+	@NamedQuery(name = Museum.GET_COUNT, query = "SELECT count(m.id) FROM Museum m")
 })
 public class Museum {
 	public static final String GET_ALL = "getAllMuseums";
+	public static final String GET_COUNT = "getCountMuseum";
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -29,6 +31,12 @@ public class Museum {
 	@Column
 	private String city;
 
+	@Column(name="long")
+	private Float longitude;
+	
+	@Column(name="lat")
+	private Float latitude;
+	
 	public long getId() {
 		return id;
 	}
@@ -60,5 +68,20 @@ public class Museum {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
+	public Float getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+
+	public Float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
 }

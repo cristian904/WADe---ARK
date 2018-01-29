@@ -17,9 +17,9 @@ import javax.persistence.Table;
 @Table(name = "artworks")
 @NamedQueries({
 	@NamedQuery(name = Artwork.GET_ARTWORK, 
-			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums"),
+			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums AND a.repositoryId LIKE :repositoryId ORDER BY a.author.id"),
 	@NamedQuery(name = Artwork.GET_ARTWORK_COUNT, 
-	query = "SELECT count(a.id) FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums"),
+	query = "SELECT count(a.id) FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums AND a.repositoryId LIKE :repositoryId"),
 })
 public class Artwork {
 	public static final String GET_ARTWORK = "getArtwork";
@@ -62,6 +62,9 @@ public class Artwork {
 	
 	@Column(name="image_url")
 	private String imageUrl;
+	
+	@Column(name="display_year")
+	private Integer displayYear;
 
 	public long getId() {
 		return id;
@@ -158,4 +161,13 @@ public class Artwork {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+
+	public Integer getDisplayYear() {
+		return displayYear;
+	}
+
+	public void setDisplayYear(Integer displayYear) {
+		this.displayYear = displayYear;
+	}
+	
 }

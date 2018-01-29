@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import ro.ark.server.dao.AuthorDao;
 import ro.ark.server.entity.Author;
+import ro.ark.server.entity.meta.NameValue;
+import ro.ark.server.entity.meta.StringIdNameValue;
 
 @Service
 public class AuthorService {
@@ -23,5 +25,16 @@ public class AuthorService {
 
 	public int getNumberOfAuthors(String name) {
 		return authorDao.getCount(name);
+	}
+
+	public void updateAuthor(Author author) {
+		authorDao.update(author);
+	}
+	
+	public List<NameValue> groupByObjectOfWork(long id){
+		return authorDao.groupByObjectOfWork(id);
+	}
+	public List<StringIdNameValue> groupByMuseum(long id){
+		return authorDao.groupByMuseum(id);
 	}
 }

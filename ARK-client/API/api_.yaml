@@ -1,0 +1,190 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Uber API
+  description: Move your app forward with the Uber API
+  version: "1.0.0"
+# the domain of the service
+host: api.uber.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /museums:
+    get:
+      description: Retrieve a list of all Romanian museums available via data.gov
+      responses:
+        200:
+          description: List of museums
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Museum'
+        default:
+          description: unexpected error
+  /artworks:
+    get:
+      description: Retrieve list of artistic works that satisfy the constrains
+      parameters:
+      - name: name
+        in: query
+        type: string
+      - name: author
+        in: query
+        type: string
+      - name: museum
+        in: query
+        type: string
+      - name: repositoryId
+        in: query
+        type: string
+      - name: pageSize
+        in: query
+        type: number
+      - name: pageNumber
+        in: query
+        type: number
+      responses:
+        200:
+          description: Success
+          schema: 
+            $ref: '#/definitions/Artworks'
+        default:
+          description: Unexpected Error
+  /artwork:
+    get:
+      description: Get information about a certain artwork
+      parameters:
+      - name: id
+        in: query
+        type: number
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/ArtworkLong'
+        404:
+          description: ID not found
+        default:
+          description: Unexpected Error
+  /author:
+    get:
+      description: Get Information about certain author
+      parameters:
+      - name: id
+        in: query
+        type: number
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/AuthorLong'
+  /authors:
+    get:
+      description: Retrieve list of art authors that respect constraints
+      parameters:
+      - name: name
+        in: query
+        type: string
+      - name: pageSize
+        in: query
+        type: number
+      - name: pageNumber
+        in: query
+        type: number
+      responses:
+        200:
+          description: Success
+          schema: 
+            $ref: '#/definitions/Authors'
+        default:
+          description: Unexpected Error
+        
+      
+definitions:
+  Museum:
+    type: object
+    properties:
+      id:
+        type: number
+      repositoryId:
+        type: string
+      repositoryName:
+        type: string
+      city:
+        type: string
+  Artworks:
+    type: object
+    properties:
+      numberOfArtworks:
+        type: number
+      artworks:
+        type: array
+        items:
+          $ref: '#/definitions/Artwork'
+  Authors:
+    type: object
+    properties:
+      numberOfAuthors:
+        type: number
+      authors:
+        type: array
+        items:
+          $ref: '#/definitions/AuthorLong'
+  Artwork:
+    type: object
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+  ArtworkLong:
+    type: object
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+      classifications:
+        type: string
+      categories:
+        type: string
+      description:
+        type: string
+      measurements:
+        type: string
+      displayState:
+        type: string
+      imageUrl:
+        type: string
+      repostioryId:
+        type: string
+      authorId:
+        type: number
+  AuthorLong:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      placeName:
+        type: string
+      country:
+        type: string
+      movementName:
+        type: string
+      birthDate:
+        type: string
+      deathDate:
+        type: string
+      desc:
+        type: string
+      image:
+        type: string
+      

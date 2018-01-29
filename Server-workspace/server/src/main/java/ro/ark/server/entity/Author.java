@@ -1,6 +1,7 @@
 package ro.ark.server.entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,10 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "authors")
@@ -23,25 +21,27 @@ public class Author {
 	@Column
 	private String name;
 
-	
-	//Extra info from DBPedia
-	@Transient
+	//Info from DBPedia
+	@Column(name="place_name")
 	private String placeName;
-	@Transient
+	@Column
 	private String country;
-	@Transient
-	private List<String> movementName;
-	@Transient
+	@Column(name="movement_name")
+	private String movementName;
+	@Column
+	private String influencers;
+	@Column
+	private String trainers;
+	@Column(name="birthDate")
 	private String birthDate;
-	@Transient
+	@Column(name="deathDate")
 	private String deathDate;
-	@Transient
+	@Column(name="description")
 	private String desc;
-	@Transient
+	@Column
 	private String image;
 	
 	public Author(){
-		movementName = new ArrayList<>();
 	}
 	
 	public long getId() {
@@ -77,11 +77,13 @@ public class Author {
 	}
 
 	public List<String> getMovementName() {
-		return movementName;
+		if(movementName == null || movementName.isEmpty()) return new ArrayList<String>();
+		
+		return new ArrayList<>(Arrays.asList(movementName.split(",")));
 	}
 
 	public void setMovementName(List<String> movementName) {
-		this.movementName = movementName;
+		this.movementName = String.join(",", movementName);
 	}
 
 	public String getBirthDate() {
@@ -116,12 +118,29 @@ public class Author {
 		this.image = image;
 	}
 
+	public List<String> getInfluencers() {
+		if(influencers == null || influencers.isEmpty()) return new ArrayList<String>();
+		return new ArrayList<>(Arrays.asList(influencers.split(",")));
+	}
+
+	public void setInfluencers(List<String> influencers) {
+		this.influencers = String.join(",", influencers);
+	}
+
+	public List<String> getTrainers() {
+		if(trainers == null || trainers.isEmpty()) return new ArrayList<String>();
+		return new ArrayList<>(Arrays.asList(trainers.split(",")));
+	}
+
+	public void setTrainers(List<String> trainers) {
+		this.trainers = String.join(",", trainers);
+	}
+
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", name=" + name + ", placeName=" + placeName + ", country=" + country
-				+ ", movementName=" + movementName + ", birthDate=" + birthDate + ", deathDate=" + deathDate + ", desc="
-				+ desc + ", image=" + image + "]";
+				+ ", movementName=" + movementName + ", influencers=" + influencers + ", trainers=" + trainers
+				+ ", birthDate=" + birthDate + ", deathDate=" + deathDate + ", desc=" + desc + ", image=" + image + "]";
 	}
-	
 	
 }

@@ -1,8 +1,5 @@
 package handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -60,8 +57,10 @@ public class RomHeritageSAXHandler extends DefaultHandler{
     	switch(qName){
 	    	case "lido":{
 	    		count++;
-	    		System.out.println("Added " + currentArtwork.getTitle());
-	    		artworkDao.addToDatabase(currentArtwork);
+//	    		System.out.println("Added " + currentArtwork.getTitle());
+//	    		artworkDao.addToDatabase(currentArtwork);
+	    		System.out.println("Setting date " + currentArtwork.getDisplayYear() + " to " + currentArtwork.getTitle());
+	    		artworkDao.addDateToDatabase(currentArtwork);
 	    		break;
 	    	}
     	}
@@ -113,12 +112,19 @@ public class RomHeritageSAXHandler extends DefaultHandler{
         }
         case "category":{
         	currentArtwork.getCategories().add(element);
+        	break;
         }
         case "nameActorSet":{
         	currentArtwork.setAuthor(element);
+        	break;
         }
         case "linkResource":{
         	currentArtwork.setImageUrl(element);
+        	break;
+        }
+        case "displayDate":{
+        	currentArtwork.setDisplayYear(element);
+        	break;
         }
         }
         
