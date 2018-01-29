@@ -9,10 +9,12 @@ export class Art{
     public type: string;
     public current: string;
     public description: string;
-    public size: Dimensions;
+    public size: string;
     public imagePath: string;
+    public state: string;
+    public museumId: number;
 
-    constructor(id: number, name: string, author: string, year:number, type: string, current: string, description: string, size: Dimensions, imagePath: string){
+    constructor(id: number, name: string, author: string, year:number, type: string, current: string, description: string, size: string, imagePath: string, state: string, museumId: number){
         this.id = id;
         this.author = author;
         this.name = name;
@@ -22,5 +24,7 @@ export class Art{
         this.size = size;
         this.type = type;
         this.imagePath = imagePath;
+        this.state = state;
+        this.museumId = museumId;
     }
 }

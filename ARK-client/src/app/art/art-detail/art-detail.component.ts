@@ -3,6 +3,7 @@ import { Art } from "../../models/Art.model";
 import { ArtService } from "../../services/art.service";
 import { ActivatedRoute } from "@angular/router";
 import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
+import { Dimensions } from "../../models/Dimensions.model";
 
 
 @Component({
@@ -12,17 +13,40 @@ import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 })
 export class ArtDetailComponent implements OnInit{
     art: Art;
-    similarArt: Art[];
+    artByArtist: Art[];
+    artByMuseum: Art[];
+    fullDescription: string;
+    authorId: number;
 
     constructor(private artService: ArtService, private route: ActivatedRoute){}
 
     ngOnInit(){
         this.route.params.subscribe(
             params => {
-                this.art = this.artService.getArtById(params['id']);
-                this.similarArt = this.artService.getSimilarArt(this.art);
+                this.artService.getArtById(params['id']).subscribe((response) => {
+                    const art = response.json();
+                    this.art =  new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId);
+                    this.authorId = art.author.id;
+                    this.fullDescription = this.art.description.slice();
+                    this.art.description = this.art.description.substring(0, 100) + "...";
+                    this.getArtsByArtist();
+                    this.getArtsByMuseum();
+                });
             }
         );
-       
     }
+
+    getArtsByArtist(){
+        this.artService.getArtsByArtist(this.art.author, 0, 50).subscribe( (response) =>{
+            response = response.json();
+            this.artByArtist = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
+        });
+    }
+    getArtsByMuseum(){
+        this.artService.getArtsByMuseum(this.art.museumId, 0, 50).subscribe( (response) =>{
+            response = response.json();
+            this.artByMuseum = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
+        });
+    }
+
 }

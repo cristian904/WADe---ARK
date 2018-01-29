@@ -1,6 +1,6 @@
 .header{
     padding-left: 100px;
-    background-color:grey;
+    background-color: grey;
     padding: 10px;
 
 }
@@ -8,8 +8,8 @@
     position: relative;
     color: white;
     display: inline-block;
+    margin-top: 0px;
     margin-left: 10px;
-    padding: 5px;
     padding-left: 8px;
     padding-right: 8px;
     font-size: 20px;
@@ -21,4 +21,15 @@
 
 .header-item:hover{
     cursor: pointer;
+}
+
+@font-face{
+    font-family: CabinSketch;
+    src: url('../../assets/fonts/cabin-sketch/CabinSketch-Regular.otf');
+}
+
+.logo{
+    padding: 0;
+    font-family: CabinSketch;
+    font-size: 35px;
 }

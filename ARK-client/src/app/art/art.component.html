@@ -1,25 +1,25 @@
     <h1>Exploreaza arta</h1>
-
-<div class="search-form">
-    <div class="search-form-item">
-        <label for="name">Nume </label>
-        <input name="name" type="text">
+<form (ngSubmit) = "onSubmit(searchForm)" #searchForm="ngForm">
+    <div class="search-form">
+        <div class="search-form-item">
+            <label for="name">Nume </label>
+            <input name="searchName" type="text" ngModel>
+        </div>
+        <div class="search-form-item">
+                <label for="author">Autor </label>
+                <input name="searchAuthor" type="text"  ngModel>
+        </div>
+        <div class="search-form-item">
+            <label for="year">Anul aparitiei </label>
+            <input name="searchYear" type="number"  ngModel>
+        </div>
+        <button class="search-button" type="submit" >Cauta</button>
     </div>
-    <div class="search-form-item">
-            <label for="author">Autor </label>
-            <input name="author" type="text">
-    </div>
-    <div class="search-form-item">
-        <label for="year">Anul aparitiei </label>
-        <input name="year" type="number">
-    </div>
-    <button class="search-button"> Cauta</button>
-</div>
+</form>
 
 <div class= "page-controls">
-        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
-        </div>
-
+    <pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
 <table>
     <thead>
         <tr>
@@ -27,23 +27,21 @@
             <td>Nume</td>
             <td>Autor</td>
             <td>An</td>
-            <td>Curent</td>
+            <td>Tip</td>
             <td width="10px">Detalii</td>
         </tr>
     </thead>
     <tbody>
-        <tr  *ngFor="let art of arts | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }"
-         [routerLink]="['/art']"
-         [queryParams]="{ id: art.id }">
+        <tr  *ngFor="let art of arts | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }">
             <td><img width="80px" height="100px" [src] = "art.imagePath"></td>
             <td>{{art.name}}</td>
             <td>{{art.author}}</td>
-            <td>{{art.year}}</td>
-            <td>{{art.current}}</td>
+            <td *ngIf = "art.year != 0">{{art.year}}</td><td *ngIf = "art.year == 0">not available</td>
+            <td>{{art.type}}</td>
             <td><a  [routerLink]="['/art', art.id]"><img height="30px" width="30px" src="../../assets/images/detail-icon.png"></a></td>
         </tr>
     </tbody>
 </table>
 <div class= "page-controls">
-<pagination-controls  (pageChange)="pageChange($event)"></pagination-controls>
+<pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
 </div>

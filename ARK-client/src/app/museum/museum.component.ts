@@ -10,21 +10,19 @@ import {} from '@agm/core';
     styleUrls: ['./museum.component.scss']
 })
 export class MuseumComponent implements OnInit{
-    private markers = [];
+    public markers = [];
 
     constructor(private museumService: MuseumService){
-        this.markers = [{
-            name: "Muzeul Taranului",
-            lat: 44.453904,
-            long: 26.082689,
-            id: 1
-
-        }]
 
     }
 
     ngOnInit(){
-        this.museumService.getMuseums();
-    }
+        this.museumService.getMuseums().subscribe((response) =>{
+            const museums = response.json();
+            this.markers = museums.map((museum) =>{
+                return {lat:museum.latitude, long: museum.longitude, name: museum.repositoryName, id: museum.repositoryId};
+            });
 
+        });
+    }
 }
