@@ -26,7 +26,20 @@ export class ArtistDetailComponent implements OnInit{
             params => {
                 this.artistService.getArtistById(params['id']).subscribe((response) => {
                     const artist = response.json();
-                    this.artist =  new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[1], artist.deathDate, artist.image);
+                    this.artist =  new Artist(artist.id, artist.name, artist.birthDate, "not available", artist.deathDate, artist.image);
+                    if(this.artist.birthDate != null){
+                        this.artist.birthDate = this.artist.birthDate.split("^^")[0];
+                    }
+                    if(this.artist.deathDate != null){
+                        this.artist.deathDate = this.artist.deathDate.split("^^")[0];
+                    }
+                    if(this.artist.deathDate != null){
+                        this.artist.deathDate = this.artist.deathDate.split("^^")[0];
+                    }
+                    if(artist.movementName.length>0){
+                        console.log(artist.movementName);
+                        this.artist.current = artist.movementName.map(m => m.split("@")[0]).reduce((acc, x) => {return acc + ", " + x });
+                    }
                     this.getArtsByArtist();
                 });
             }

@@ -33,7 +33,6 @@ export class ArtListComponent implements OnInit{
     }
 
     onArtClick(art){
-        this.artService.artWasSelected.emit(art);
         this.router.navigate(['/art', art.id]);
     }
 

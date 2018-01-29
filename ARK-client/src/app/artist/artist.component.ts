@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ArtistService } from '../services/artist.service';
 import { Artist } from "../models/Artist.model";
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from "@angular/forms";
 
 @Component({
     selector: 'app-artist',
@@ -14,6 +15,8 @@ export class ArtistComponent{
     pageSize = 3;
     p = 1;
     total = 8;
+    form: NgForm;
+    formSubmited = false;
 
     constructor(private artistService: ArtistService, private route: ActivatedRoute, private router: Router){
           }
@@ -22,7 +25,11 @@ export class ArtistComponent{
         this.route.queryParams.subscribe((queryParams) => {
             this.p = queryParams['pageNumber'];
             this.pageSize = queryParams['pageSize'];
-            this.getArtistsForPage();
+            if(!this.formSubmited){
+                this.getArtistsForPage();
+            }else{
+                this.getArtistsForSearch(this.form.value.searchName);
+            }
         });
         this.getArtistsForPage();
     }
@@ -36,7 +43,21 @@ export class ArtistComponent{
             response = response.json();
             this.total = response["numberOfAuthors"];
             this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[0], artist.deathDate, artist.image));
-            console.log(response);
+        });
+    }
+
+    onSubmit(form){
+        this.formSubmited = true;
+        this.form = form;
+        this.p = 1;
+        this.getArtistsForSearch(form.value.searchName);
+        this.router.navigate(['/artists'], {  queryParams: {pageNumber : this.p, pageSize: this.pageSize} });
+    }
+    getArtistsForSearch(name){
+        this.artistService.getArtistForSearch(name, this.p, this.pageSize).subscribe( (response) =>{
+            response = response.json();
+            this.total = response["numberOfAuthors"];
+            this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[0], artist.deathDate, artist.image));
         });
     }
 

@@ -22,6 +22,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { NgxCarouselModule } from 'ngx-carousel';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HomeComponent } from './home/home.component';
 import { MuseumGalleryComponent } from './museum/museum-gallery/museum-gallery.component';
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
     ArtistDetailComponent
   ],
   imports: [
+    FormsModule,
     NgxPaginationModule,
     NgxCarouselModule,
     NgxChartsModule,

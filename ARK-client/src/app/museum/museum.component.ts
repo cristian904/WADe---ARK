@@ -10,7 +10,7 @@ import {} from '@agm/core';
     styleUrls: ['./museum.component.scss']
 })
 export class MuseumComponent implements OnInit{
-    private markers = [];
+    public markers = [];
 
     constructor(private museumService: MuseumService){
 

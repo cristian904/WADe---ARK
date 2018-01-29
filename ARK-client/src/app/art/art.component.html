@@ -1,20 +1,21 @@
     <h1>Exploreaza arta</h1>
-
-<div class="search-form">
-    <div class="search-form-item">
-        <label for="name">Nume </label>
-        <input name="name" type="text">
+<form (ngSubmit) = "onSubmit(searchForm)" #searchForm="ngForm">
+    <div class="search-form">
+        <div class="search-form-item">
+            <label for="name">Nume </label>
+            <input name="searchName" type="text" ngModel>
+        </div>
+        <div class="search-form-item">
+                <label for="author">Autor </label>
+                <input name="searchAuthor" type="text"  ngModel>
+        </div>
+        <div class="search-form-item">
+            <label for="year">Anul aparitiei </label>
+            <input name="searchYear" type="number"  ngModel>
+        </div>
+        <button class="search-button" type="submit" >Cauta</button>
     </div>
-    <div class="search-form-item">
-            <label for="author">Autor </label>
-            <input name="author" type="text">
-    </div>
-    <div class="search-form-item">
-        <label for="year">Anul aparitiei </label>
-        <input name="year" type="number">
-    </div>
-    <button class="search-button"> Cauta</button>
-</div>
+</form>
 
 <div class= "page-controls">
     <pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>

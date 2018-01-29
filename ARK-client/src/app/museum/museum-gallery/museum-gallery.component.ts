@@ -34,7 +34,7 @@ export class MuseumGalleryComponent implements OnInit{
     }
 
     getArtsByMuseum(museumId){
-        this.artService.getArtsByMuseum(museumId, 0, 50).subscribe( (response) =>{
+        this.artService.getArtsByMuseum(museumId, 0, 100).subscribe( (response) =>{
             response = response.json();
             this.artGallery = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
             console.log(this.artGallery);
