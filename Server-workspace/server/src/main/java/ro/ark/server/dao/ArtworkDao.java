@@ -17,27 +17,34 @@ public class ArtworkDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public List<Artwork> get(String title, String author, List<String> museumIds, int pageSize, int pageNumber) {
+	public List<Artwork> get(String title, String author, List<String> museumIds, String repositoryId, int pageSize, int pageNumber) {
 		title = Utils.prepareForLikeStatement(title);
 		author = Utils.prepareForLikeStatement(author);
-		
+		if(repositoryId == null || repositoryId.isEmpty()){
+			repositoryId = "%%";
+		}
 		return em.createNamedQuery(Artwork.GET_ARTWORK, Artwork.class)
 			.setParameter("title", title)
 			.setParameter("author", author)
 			.setParameter("museums", museumIds)
+			.setParameter("repositoryId", repositoryId)
 			.setMaxResults(pageSize)
 			.setFirstResult(pageSize*pageNumber)
 			.getResultList();
 	}
 
-	public int getCount(String title, String author, List<String> museumIds) {
+	public int getCount(String title, String author, List<String> museumIds, String repositoryId) {
 		title = Utils.prepareForLikeStatement(title);
 		author = Utils.prepareForLikeStatement(author);
+		if(repositoryId == null || repositoryId.isEmpty()){
+			repositoryId = "%%";
+		}
 		
 		return (int)(long)em.createNamedQuery(Artwork.GET_ARTWORK_COUNT)
 			.setParameter("title", title)
 			.setParameter("author", author)
 			.setParameter("museums", museumIds)
+			.setParameter("repositoryId", repositoryId)
 			.getSingleResult();
 	}
 

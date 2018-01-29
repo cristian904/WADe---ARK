@@ -136,8 +136,32 @@ public class ArtworkDAO {
 		}catch(SQLException ex){
 			System.err.println(ex.getMessage());
 			System.out.println(a.toString());
-		}
-		
-		
+		}		
+	}
+	
+	public void addDateToDatabase(Artwork a){
+		String SQL = "UPDATE artworks SET display_year = ? WHERE recID = ?";
+		try(Connection conn = pgConn.connect();
+				PreparedStatement stmt = conn.prepareStatement(SQL);
+				){
+			if(a.getDisplayYear() == null){
+				stmt.setInt(1, 0);				
+			}else{
+				int year = 0;
+				try{
+					year = Integer.parseInt(a.getDisplayYear());
+				}catch(NumberFormatException e){
+					year = 0;
+				}
+				
+				stmt.setInt(1, year);
+			}
+			stmt.setString(2, a.getId());
+//			System.out.println("Updating " + a.getId());
+			stmt.executeUpdate();
+		}catch(SQLException ex){
+			System.err.println(ex.getMessage());
+			System.out.println(a.toString());
+		}	
 	}
 }

@@ -59,13 +59,14 @@ public class MainController {
 			 @RequestParam(value = "title", required = false) String title,
 			 @RequestParam(value = "author", required = false) String author,
 			 @RequestParam(value = "museum", required = false) String museum,
-			 @RequestParam(value = "pageNumber", required = false) int pageNumber,
-			 @RequestParam(value = "pageSize", required = false) int pageSize
+			 @RequestParam(value = "repositoryId", required = false) String repositoryId,
+			 @RequestParam(value = "pageNumber") int pageNumber,
+			 @RequestParam(value = "pageSize") int pageSize
 			 ){
-		 
+		 pageNumber-- ;
 		 ArtworksGetResponse response =new ArtworksGetResponse(
-				 artworkService.getArtwork(title, author, museum, pageSize, pageNumber),
-				 artworkService.getNumberOfArtworks(title, author, museum));
+				 artworkService.getArtwork(title, author, museum, repositoryId, pageSize, pageNumber),
+				 artworkService.getNumberOfArtworks(title, author, museum, repositoryId));
 		 
 		 return new ResponseEntity<>(
 				 response,
@@ -76,10 +77,11 @@ public class MainController {
 	 @RequestMapping("/authors")
 	 public ResponseEntity<AuthorsGetResponse> getAuthors(
 			 @RequestParam(value = "name", required = false) String name,
-			 @RequestParam(value = "pageNumber", required = false) int pageNumber,
-			 @RequestParam(value = "pageSize", required = false) int pageSize
+			 @RequestParam(value = "pageNumber") int pageNumber,
+			 @RequestParam(value = "pageSize") int pageSize
 			 ){
-		 
+
+		 pageNumber-- ;
 		 AuthorsGetResponse response = new AuthorsGetResponse(
 				 authorService.getAll(name, pageSize, pageNumber),
 				 authorService.getNumberOfAuthors(name));
@@ -93,8 +95,9 @@ public class MainController {
 	 @RequestMapping("/author/{id}")
 	 public ResponseEntity<?> getAuthor(@PathVariable Long id){
 		 Author author = authorService.getById(id);
-		 
+		 if(author == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		 author = dbPediaService.getAuthorInfo(author);
+		 authorService.updateAuthor(author);
 		 
 		 return new ResponseEntity<>(author, HttpStatus.OK);
 	 }

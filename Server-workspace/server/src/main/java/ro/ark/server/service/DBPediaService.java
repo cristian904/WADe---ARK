@@ -24,27 +24,47 @@ public class DBPediaService {
 		authorNames = authorNames.stream().map(n -> n.trim()).collect(Collectors.toList());
 		
 		String queryString =
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
-			    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
-				"PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+		
-				"PREFIX type: <http://dbpedia.org/class/yago/> " + 
-				 "PREFIX dbpediaO: <http://dbpedia.org/ontology/> " + 
-				 "SELECT DISTINCT ?x ?place_name ?desc ?country_name ?movement_name ?birthDate ?deathDate ?img " + 
-				 "WHERE { " + 
-				 "    ?x rdf:type dbpediaO:Artist . " + 
-				 "    ?x foaf:name ?name . " + 
-				 "    ?x dbpediaO:birthPlace ?place. " + 
-				 "    ?x rdfs:comment ?desc. " + 
-				 "    ?place dbpediaO:country ?country. " + 
-				 "    ?country foaf:name ?country_name. " + 
-				 "    ?place foaf:name ?place_name. " + 
-				 "    ?x dbpediaO:movement ?movement. " + 
-				 "    ?movement rdfs:label ?movement_name. " + 
-				 "    ?x dbpediaO:birthDate ?birthDate. " + 
-				 "    ?x dbpediaO:deathDate ?deathDate. " + 
-				 "    ?x foaf:depiction ?img. " + 
-				 "    filter langMatches( lang(?movement_name), 'EN' ) " + 
-				 "    filter langMatches( lang(?desc), 'EN' ) " + 
+				" PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"+
+				" PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"+
+				" PREFIX foaf: <http://xmlns.com/foaf/0.1/> \t\t\n"+
+				" PREFIX type: <http://dbpedia.org/class/yago/> \n"+
+				" PREFIX dbpediaO: <http://dbpedia.org/ontology/> \n"+
+				" SELECT DISTINCT ?x ?place_name ?desc ?country_name ?movement_name ?birthDate ?deathDate ?img ?influencer_name ?trainer_name \n"+
+				" WHERE { \n"+
+				" {?x rdf:type dbpediaO:Artist} UNION {?x rdf:type type:Artist109812338} . \n"+
+				" ?x foaf:name ?name . \n"+
+				" OPTIONAL{\n"+
+				"\t ?x dbpediaO:birthDate ?birthDate. \n"+
+				"\t ?x dbpediaO:deathDate ?deathDate. \n"+
+				" }\n"+
+				" OPTIONAL{\n"+
+				"\t ?x dbpediaO:birthPlace ?place. \n"+
+				"\t ?place dbpediaO:country ?country. \n"+
+				"\t ?country foaf:name ?country_name. \n"+
+				"\t ?place foaf:name ?place_name. \n"+
+				" }\n"+
+				" OPTIONAL{\n"+
+				"\t ?x rdfs:comment ?desc. \n"+
+				"\t filter langMatches( lang(?desc), \'EN\' ) \n"+
+				" }\t\n"+
+				" OPTIONAL{ \n"+
+				"\t ?x dbpediaO:movement ?movement. \n"+
+				"\t ?movement rdfs:label ?movement_name. \n"+
+				"\t filter langMatches( lang(?movement_name), \'EN\' ) \n"+
+				" }\t\n"+
+				" OPTIONAL{ \n"+
+				"\t \t ?x dbpediaO:influencedBy ?influencer. \n"+
+				"\t \t ?influencer rdfs:label ?influencer_name. \n"+
+				"\t filter langMatches( lang(?influencer_name), \'EN\' ) \n"+
+				" \t }\n"+
+				" \t OPTIONAL{\n"+
+				"\t\t?x dbpediaO:training ?trainer. \n"+
+				"\t ?trainer rdfs:label ?trainer_name. \n"+
+				"\t filter langMatches( lang(?trainer_name), \'EN\' ) \n"+
+				" } \n"+
+				" OPTIONAL{\n"+
+				"\t ?x foaf:depiction ?img. \n"+
+				" }\n"+
 				 " 	  filter contains(?name, \"" + authorNames.get(0) + "\") " + 
 				 (authorNames.size() > 1 ? "filter contains(?name, \"" + authorNames.get(1) + "\")" : "") + 
 				 "} " + 
@@ -72,7 +92,25 @@ public class DBPediaService {
 
 				if(soln.contains("movement_name")){
 					if(!author.getMovementName().contains(soln.get("movement_name").toString())){
-						author.getMovementName().add(soln.get("movement_name").toString());
+						List<String> movements = author.getMovementName();
+						movements.add(soln.get("movement_name").toString());
+						author.setMovementName(movements);
+					}
+				}
+				
+				if(soln.contains("influencer_name")){
+					if(!author.getInfluencers().contains(soln.get("influencer_name").toString())){
+						List<String> influencers = author.getInfluencers();
+						influencers.add(soln.get("influencer_name").toString());
+						author.setInfluencers(influencers);
+					}
+				}
+
+				if(soln.contains("trainer_name")){
+					if(!author.getTrainers().contains(soln.get("trainer_name").toString())){
+						List<String> trainers = author.getTrainers();
+						trainers.add(soln.get("trainer_name").toString());
+						author.setTrainers(trainers);
 					}
 				}
 			}	

@@ -20,6 +20,8 @@ public class Artwork {
 	String measurements;
 	String imageUrl;
 	
+	String displayYear;
+	
 	String displayState;
 	
 	public Artwork(){
@@ -100,14 +102,61 @@ public class Artwork {
 	public void setCategories(List<String> categories) {
 		this.categories = categories;
 	}
+	
+	public String getDisplayYear() {
+		return displayYear;
+	}
+
+	public void setDisplayYear(String displayYear) {
+		try{
+			if("NEDATAT".equals(displayYear.toUpperCase())){
+				displayYear = "0";
+			}else if(displayYear.contains("19")){
+				displayYear = displayYear.substring(displayYear.indexOf("19"), displayYear.indexOf("19") + 4);
+			}else if(displayYear.contains("18")){
+				displayYear = displayYear.substring(displayYear.indexOf("18"), displayYear.indexOf("18") + 4);
+			}else if(displayYear.contains("17")){
+				displayYear = displayYear.substring(displayYear.indexOf("17"), displayYear.indexOf("17") + 4);
+			}else if(displayYear.contains("16")){
+				displayYear = displayYear.substring(displayYear.indexOf("16"), displayYear.indexOf("16") + 4);
+			}else if(displayYear.contains("15")){
+				displayYear = displayYear.substring(displayYear.indexOf("15"), displayYear.indexOf("15") + 4);
+			}else if(displayYear.contains("14")){
+				displayYear = displayYear.substring(displayYear.indexOf("14"), displayYear.indexOf("14") + 4);
+			}else if(displayYear.contains("13")){
+				displayYear = displayYear.substring(displayYear.indexOf("13"), displayYear.indexOf("13") + 4);
+			}else if(displayYear.contains("XXI")){
+				displayYear = "2000";
+			}else if(displayYear.contains("XX")){
+				displayYear = "1900";
+			}else if(displayYear.contains("XIX")){
+				displayYear = "1800";
+			}else if(displayYear.contains("XVIII")){
+				displayYear = "1700";
+			}else if(displayYear.contains("XVII")){
+				displayYear = "1600";
+			}else if(displayYear.contains("XVI")){
+				displayYear = "1500";
+			}else {
+				displayYear = "0";
+			}
+			
+			this.displayYear = displayYear;
+		}catch(StringIndexOutOfBoundsException e){
+			System.err.println("Error for " + this.getId() + " , " + this.getTitle());
+		}
+		
+	}
 
 	@Override
 	public String toString() {
-		return "Artwork [id=" + id + ", objectOfWork=" + objectOfWork + ", classification=" + classification
-				+ ", categories=" + categories + ", title=" + title + ", repositoryId=" + repositoryId
+		return "Artwork [id=" + id + ", objectOfWork=" + objectOfWork + ", author=" + author + ", classification="
+				+ classification + ", categories=" + categories + ", title=" + title + ", repositoryId=" + repositoryId
 				+ ", repositoryName=" + repositoryName + ", description=" + description + ", measurements="
-				+ measurements + ", displayState=" + displayState + "]";
+				+ measurements + ", imageUrl=" + imageUrl + ", displayYear=" + displayYear + ", displayState="
+				+ displayState + "]";
 	}
+
 
 	
 }
