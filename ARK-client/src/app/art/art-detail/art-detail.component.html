@@ -13,11 +13,13 @@
     </div>
 </div>
 <hr>
-<div class="detail-item">
-    <p class = "subtitles">Alte lucrari ale artistului {{art.author}}</p>
-    <app-art-list [arts] = "artByArtist"></app-art-list>
-</div>
-<div class="detail-item">
-    <p class = "subtitles">Din acelasi muzeu mai puteti vizita</p>
-    <app-art-list [arts] = "artByMuseum"></app-art-list>
+<div class="lists-wrapper">
+    <div class="detail-item">
+        <p class = "subtitles">Alte lucrări ale artistului {{art.author}}</p>
+        <app-art-list [arts] = "artByArtist"></app-art-list>
+    </div>
+    <div class="detail-item">
+        <p class = "subtitles">În același muzeu mai puteți vizita</p>
+        <app-art-list [arts] = "artByMuseum"></app-art-list>
+    </div>
 </div>

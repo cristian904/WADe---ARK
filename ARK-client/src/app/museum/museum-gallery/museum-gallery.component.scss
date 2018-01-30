@@ -1,8 +1,26 @@
+.museum-gallery__wrapper{
+  width:80%;
+  margin: auto;
+
+  h1, h2{
+  text-align: center;
+  }
+  h1{
+    font-size: 3em;
+  }
+
+  h3{
+    font-size: 1.5em;
+    color: gray;
+  }
+
+}
 .image-gallery{
     position: relative;
     display: inline-block;
     margin: 50px;
     width: 250px;
+    cursor: pointer;
 }
 
 .overlay {
@@ -15,7 +33,7 @@
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: grey;
+    background-color: black;
   }
 
   .image-gallery:hover .overlay {
@@ -31,6 +49,9 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
+    .author{
+      font-weight: bold;
+    }
   }
 
   .image {

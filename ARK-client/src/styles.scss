@@ -3,10 +3,13 @@
     font-size: 100%;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
    }
-
+body{
+    margin: 0px;
+}
 h1{
     letter-spacing: 1px;
-    font-size: 30px;
+    font-size: 3em;
+    text-align: center;
 }
 
 .search-form{
@@ -26,7 +29,8 @@ h1{
     padding-right: 10px;
     border: none;
     border-radius: 10px;
-    background-color: grey;
+    background-color: black;
+    cursor: pointer;
 }
 input, select {
     margin: 10px 0;
@@ -57,7 +61,7 @@ thead {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color:grey;
+    background-color:black;
     color: white;
 }
 .page-controls{

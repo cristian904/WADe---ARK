@@ -1,9 +1,13 @@
-<p class="title">{{museum.name}} {{museum.location}}  (<a [routerLink] = "['stats']">Statistici</a>)</p>
-<div style="width:100px;"></div>
-<h1>Lucrari de arta</h1>
-<div class="image-gallery" *ngFor = "let art of artGallery">
-        <img class="image" src = "{{art.imagePath}}" alt={{art.name}}>
-        <div  (click) = "onArtClick(art)" class="overlay">
-            <div class="text">{{art.name}}<br><i>{{art.author}}</i>
-        </div>
-</div>
+<div class="museum-gallery__wrapper">
+  <h1 class="title">{{museum.name}} - {{capitalizeFirstLetter(museum.location)}} </h1> 
+  <h2>(<a [routerLink]="['stats']">Statistici</a>)</h2>
+  <h3>Lucrări de artă</h3>
+  <div class="image-gallery" *ngFor="let art of artGallery">
+    <img class="image" src="{{art.imagePath}}" alt={{art.name}}>
+    <div (click)="onArtClick(art)" class="overlay">
+      <div class="text"><span class="author">{{art.name}}</span>
+        <br>
+        <i>{{art.author}}</i>
+      </div>
+    </div>
+  </div>

@@ -1,23 +1,23 @@
-<h1>Exploreaza muzee</h1>
-<div class = "map-canvas">
-    <agm-map class="google-map"
-    [latitude]="46"
-    [longitude]="25"
-    [zoom]="7"> 
-    <agm-marker 
-    *ngFor="let m of markers; let i = index"
-    [latitude]="m.lat"
-    [longitude]="m.long"
-    >
+<div class="museum_wrapper">
+    <h1>Explorează muzee</h1>
+    <div class = "map-canvas">
+        <agm-map class="google-map"
+        [latitude]="46"
+        [longitude]="25"
+        [zoom]="7"> 
+        <agm-marker 
+        *ngFor="let m of markers; let i = index"
+        [latitude]="m.lat"
+        [longitude]="m.long"
+        >
 
-    <agm-info-window>
-        <strong>{{m.name}}</strong>
-        <a [routerLink]="['/museums', m.id]">Go To Museum</a>
-    </agm-info-window>
+        <agm-info-window class="info-window">
+            <h2>{{m.name}}</h2>
+            <a [routerLink]="['/museum', m.id]">Vizitează galerie</a>
+        </agm-info-window>
 
-    </agm-marker>
+        </agm-marker>
 
-    </agm-map>
+        </agm-map>
+    </div>
 </div>
-
-<router-outlet></router-outlet>

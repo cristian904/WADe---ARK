@@ -1,4 +1,11 @@
-<h1>{{museum.name}} {{museum.location}}</h1>
-<app-pie-chart [single] = "stateOfWorks" ></app-pie-chart>
-<app-bar-chart [single] = "authors" [yAxisLabel] = "'Artisti'" [xAxisLabel] = "'Numar lucrari'"></app-bar-chart>
-<app-bar-chart [single] = "objectOfWorks" [yAxisLabel] = "'Tip lucrare'" [xAxisLabel] = "'Numar lucrari'"></app-bar-chart>
+<div class="museum-stats__wrapper">
+  <h1>{{museum.name}} - {{capitalizeFirstLetter(museum.location)}}</h1>
+  <h3> Starea lucrărilor</h3>
+  <div class="pie-chart">
+    <app-pie-chart [single]="stateOfWorks"></app-pie-chart>
+  </div>
+  <h3> Număr de lucrări per artist</h3>
+  <app-bar-chart [single]="authors" [yAxisLabel]="'Artisti'" [xAxisLabel]="'Numar lucrari'"></app-bar-chart>
+  <h3> Număr de lucrări per tip de lucrare</h3>
+  <app-bar-chart [single]="objectOfWorks" [yAxisLabel]="'Tip lucrare'" [xAxisLabel]="'Numar lucrari'"></app-bar-chart>
+</div>

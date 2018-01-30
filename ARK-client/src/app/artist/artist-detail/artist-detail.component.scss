@@ -1,3 +1,16 @@
+.details-wrapper{
+    width:90%;
+    margin: auto;
+    
+    .subtitles{
+        font-size: 2em;
+        color: gray;
+        font-weight: bold;
+        display: block;
+        text-align: left;
+        display: inline;
+    }
+}
 .detail-item-info{
     float: left;
     margin: 10px;
@@ -14,11 +27,6 @@
     font-weight: bold;
 }
 
-.subtitles{
-    font-size: 20px;
-    font-weight: bold;
-    display: block;
-}
 .detail-names{
     display: inline-block;
     min-width: 120px;

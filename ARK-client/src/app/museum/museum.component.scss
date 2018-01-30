@@ -1,14 +1,25 @@
-.google-map{
-    height: 550px;
-    width: 800px;
-}
+.museum_wrapper{
+    width:80%;
+    margin: auto;
+    
 
-.map-canvas{
-    margin-top: 10px;
-    float: left;
-}
+    .map-canvas{
+        margin-top: 40px;
+        margin-left:calc(50% - 400px);
 
-h1{
-    letter-spacing: 1px;
-    font-size: 30px;
+        .info-window{
+            height:50px;
+        }
+        .google-map{
+            height: 550px;
+            width: 800px;
+            
+        }
+    }
+
+    h1{
+        letter-spacing: 1px;
+        font-size: 30px;
+        text-align: center;
+    }
 }

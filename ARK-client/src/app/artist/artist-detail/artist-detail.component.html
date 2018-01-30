@@ -10,16 +10,22 @@
     </div>
     <div class="detail-item-info">
         <app-pie-grid-chart [single] = "museumsStats" [mapping] = "museumsStats" [about] = "'museum'" [view] = "[800,500]" ></app-pie-grid-chart>
-        <app-pie-chart [single] = "objectOfWorkStats"></app-pie-chart>
+        <!-- <app-pie-chart [single] = "objectOfWorkStats"></app-pie-chart> -->
     </div>
 
 </div>
+<hr/>
+<div class="details-wrapper">
+    <h2 class = "subtitles">Lucrări</h2>
+    <div class="detail-item">
+        <app-art-list [arts]="artsFromArtists"></app-art-list>
+    </div>
 
-<div class="detail-item">
-    <app-art-list [arts]="artsFromArtists"></app-art-list>
-</div>
-
-<div class ="detail-item" *ngFor = "let movements of artistsByMovement">
-    <p class = "subtitles">Alti autori din curentul {{movements.movementName}}</p>
-    <app-artist-list [artists] = "movements.authors"></app-artist-list>
+    <div class ="detail-item" *ngFor = "let movements of artistsByMovement">
+        <h2 class = "subtitles">Alti autori din curentul {{movements.movementName}}</h2>
+        <br/>
+        <div>
+            <app-artist-list [artists] = "movements.authors"></app-artist-list>
+        </div>
+    </div>
 </div>
