@@ -30,7 +30,7 @@ export class ArtComponent implements OnInit{
                 this.getArtsForPage();
             }
             else{
-                this.getArtsForSearch(this.form.value.searchName, this.form.value.searchAuthor);
+                this.getArtsForSearch(this.form.value.searchName, this.form.value.searchAuthor, this.form.value.searchType);
             }
             
         });
