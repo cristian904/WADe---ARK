@@ -5,6 +5,7 @@
     <div class="detail-item-info">
         <p class = "title">{{art.name}}</p>
         <p><span class = "detail-names">Autor</span> <span> <a  href = "/artist/{{authorId}}">{{art.author}}</a></span></p>
+        <p><span class = "detail-names">Muzeu</span> <span> <a [routerLink] = "['/museum', art.museumId]"> {{museumName}}</a></span></p>
         <p><span class = "detail-names">Anul aparitiei</span> <span *ngIf = "art.year != 0"> {{art.year}}</span><span *ngIf = "art.year == 0">not availabe</span></p>
         <p><span class = "detail-names">Tip</span> <span> {{art.type}}</span></p>
         <p><span class = "detail-names">Dimensiuni</span> <span> {{art.size}} </span></p>

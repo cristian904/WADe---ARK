@@ -52,14 +52,13 @@ export class ArtComponent implements OnInit{
     onSubmit(form: NgForm){
         this.form = form;
         this.formSubmited = true;
-        console.log(form.value.searchName);
         this.p = 1;
-        this.getArtsForSearch(form.value.searchName, form.value.searchAuthor);
+        this.getArtsForSearch(form.value.searchName, form.value.searchAuthor, form.value.searchType);
         this.router.navigate(['/arts'], {  queryParams: {pageNumber : this.p, pageSize: this.pageSize} });
     }
 
-    getArtsForSearch(name, author){
-        this.artService.getArtsBySearch(name, author, this.p, this.pageSize).subscribe( (response) =>{
+    getArtsForSearch(name, author, type){
+        this.artService.getArtsBySearch(name, author, type, this.p, this.pageSize).subscribe( (response) =>{
             response = response.json();
             this.total = response["numberOfArtworks"];
             this.arts = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));

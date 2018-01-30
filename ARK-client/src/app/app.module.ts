@@ -26,11 +26,16 @@ import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HomeComponent } from './home/home.component';
 import { MuseumGalleryComponent } from './museum/museum-gallery/museum-gallery.component';
+import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { MuseumStatsComponent } from './museum/museum-stats/museum-stats.component';
+import { PieGridChartComponent } from './charts/pie-grid-chart/pie-grid-chart.component';
+import { ArtistListComponent } from './artist/artist-list/artist-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'museums', component: MuseumComponent, children: [{ path:':id', component: MuseumDetailComponent }]},
   { path: 'museum/:id', component: MuseumGalleryComponent},
+  { path: 'museum/:id/stats', component: MuseumStatsComponent},
   { path: 'arts', component: ArtComponent}, 
   { path: 'art/:id', component: ArtDetailComponent},
   { path: 'artists', component: ArtistComponent},
@@ -44,9 +49,12 @@ const appRoutes: Routes = [
     HeaderComponent,
     //Charts
     PieChartComponent,
+    BarChartComponent,
+    PieGridChartComponent,
     //Museums
     MuseumComponent,
     MuseumDetailComponent,
+    MuseumStatsComponent,
     MuseumGalleryComponent,
     //Works of art
     ArtComponent,
@@ -54,7 +62,8 @@ const appRoutes: Routes = [
     ArtListComponent,
     //Artists
     ArtistComponent,
-    ArtistDetailComponent
+    ArtistDetailComponent,
+    ArtistListComponent
   ],
   imports: [
     FormsModule,

@@ -42,7 +42,7 @@ export class ArtistComponent{
         this.artistService.getArtistForPage(this.p, this.pageSize).subscribe( (response) =>{
             response = response.json();
             this.total = response["numberOfAuthors"];
-            this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[0], artist.deathDate, artist.image));
+            this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, "", "", "", artist.image));
         });
     }
 
@@ -58,6 +58,7 @@ export class ArtistComponent{
             response = response.json();
             this.total = response["numberOfAuthors"];
             this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[0], artist.deathDate, artist.image));
+            console.log(this.artists);
         });
     }
 

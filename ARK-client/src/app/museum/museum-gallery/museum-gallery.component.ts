@@ -14,35 +14,43 @@ import { Position } from "../../models/Position.model";
 })
 export class MuseumGalleryComponent implements OnInit{
 
-    artGallery: Art[];
-    museum: Museum;
+    public artGallery: Art[];
+    public museum: Museum;
+    public objectOfWorks;
+    public stateOfWorks;
+    public museumId: number;
+    public authors;
 
-    constructor(private museumService: MuseumService,private artService: ArtService, private route: ActivatedRoute, private router: Router){}
+    constructor(private museumService: MuseumService,private artService: ArtService, private route: ActivatedRoute, private router: Router){
+        
+    }
 
     ngOnInit(){
         this.route.params.subscribe(params => {
             this.getArtsByMuseum(params['id']);
+            this.museumId = params['id'];
             this.museumService.getMuseums().subscribe((response) =>{
+                
                 const museums = response.json();
                 museums.forEach(museum => {
                     if (museum['repositoryId'] == params['id'])
                         this.museum = new Museum(museum.repositoryId, museum.repositoryName, museum.city, new Position(museum.latitude, museum.longitude));
                 });
             });
-        });
-        
+        });        
     }
 
     getArtsByMuseum(museumId){
-        this.artService.getArtsByMuseum(museumId, 0, 100).subscribe( (response) =>{
+        this.artService.getArtsByMuseum(museumId, 1, 100).subscribe( (response) =>{
             response = response.json();
             this.artGallery = response['artworks'].map( art => new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId));
-            console.log(this.artGallery);
         });
     }
 
     onArtClick(art){
         this.router.navigate(['/art', art.id]);
     }
+
+   
 
 }

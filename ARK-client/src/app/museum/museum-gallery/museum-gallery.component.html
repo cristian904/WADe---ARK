@@ -1,6 +1,6 @@
-<p class="title">{{museum.name}}</p>
-<p><span class = "detail-names">Oras</span> <span> {{museum.location}}</span></p>
-
+<p class="title">{{museum.name}} {{museum.location}}  (<a [routerLink] = "['stats']">Statistici</a>)</p>
+<div style="width:100px;"></div>
+<h1>Lucrari de arta</h1>
 <div class="image-gallery" *ngFor = "let art of artGallery">
         <img class="image" src = "{{art.imagePath}}" alt={{art.name}}>
         <div  (click) = "onArtClick(art)" class="overlay">
