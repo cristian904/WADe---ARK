@@ -2,23 +2,22 @@ package ro.ark.server.entity.meta;
 
 import java.util.List;
 
-import ro.ark.server.entity.Artwork;
 import ro.ark.server.entity.Author;
 
 public class AuthorsGetResponse {
-	public List<Author> authors;
+	public List<AuthorShort> authors;
 	public int numberOfAuthors;
 	
 	public AuthorsGetResponse(){}
-	public AuthorsGetResponse(List<Author> authors, int numberOfAuthors){
+	public AuthorsGetResponse(List<AuthorShort> authors, int numberOfAuthors){
 		this.authors = authors;
 		this.numberOfAuthors = numberOfAuthors;
 	}
 	
-	public List<Author> getAuthors() {
+	public List<AuthorShort> getAuthors() {
 		return authors;
 	}
-	public void setAuthors(List<Author> authors) {
+	public void setAuthors(List<AuthorShort> authors) {
 		this.authors = authors;
 	}
 	public int getNumberOfAuthors() {

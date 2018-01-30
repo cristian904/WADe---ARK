@@ -17,9 +17,9 @@ import javax.persistence.Table;
 @Table(name = "artworks")
 @NamedQueries({
 	@NamedQuery(name = Artwork.GET_ARTWORK, 
-			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums AND a.repositoryId LIKE :repositoryId ORDER BY a.author.id"),
+			query = "SELECT a FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums AND a.repositoryId LIKE :repositoryId AND UPPER(a.objectOfWork) like :objectOfWork ORDER BY a.author.id"),
 	@NamedQuery(name = Artwork.GET_ARTWORK_COUNT, 
-	query = "SELECT count(a.id) FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums AND a.repositoryId LIKE :repositoryId"),
+	query = "SELECT count(a.id) FROM Artwork a WHERE UPPER(a.title) LIKE :title AND UPPER(a.author.name) LIKE :author AND a.repositoryId IN :museums AND a.repositoryId LIKE :repositoryId AND UPPER(a.objectOfWork) like :objectOfWork"),
 })
 public class Artwork {
 	public static final String GET_ARTWORK = "getArtwork";

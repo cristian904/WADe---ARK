@@ -9,11 +9,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "authors")
+@NamedQueries({
+	@NamedQuery(name = Author.GET_BY_MOVEMENT, 
+			query = "SELECT a FROM Author a WHERE UPPER(a.movementName) LIKE :movement"),
+})
 public class Author {
+	public final static String GET_BY_MOVEMENT = "getAuthorByMovement";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -40,6 +49,9 @@ public class Author {
 	private String desc;
 	@Column
 	private String image;
+	
+	@Transient
+	private int numberOfArtworks;
 	
 	public Author(){
 	}
@@ -136,6 +148,14 @@ public class Author {
 		this.trainers = String.join(",", trainers);
 	}
 
+	public int getNumberOfArtworks() {
+		return numberOfArtworks;
+	}
+
+	public void setNumberOfArtworks(int numberOfArtworks) {
+		this.numberOfArtworks = numberOfArtworks;
+	}
+	
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", name=" + name + ", placeName=" + placeName + ", country=" + country

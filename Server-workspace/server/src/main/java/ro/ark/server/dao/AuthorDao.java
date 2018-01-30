@@ -30,7 +30,7 @@ public class AuthorDao {
 	public List<Author> getAll(String name, int pageSize, int pageNumber) {
 		name = Utils.prepareForLikeStatement(name);
 		
-		List<Object[]> results = em.createNativeQuery("select authors.id, authors.name, count(artworks.id) from authors, artworks "
+		List<Object[]> results = em.createNativeQuery("select authors.id, authors.name, authors.image, count(artworks.id) from authors, artworks "
 				+ "where authors.id = artworks.author_id and upper(authors.name) like :name "
 				+ "group by authors.name, authors.id "
 				+ "order by count(artworks.id) desc")
@@ -44,6 +44,8 @@ public class AuthorDao {
 			Author a = new Author();
 			a.setId((long)(int)result[0]);
 			a.setName((String)result[1]);
+			a.setImage((String)result[2]);
+			a.setNumberOfArtworks((int)((BigInteger)result[3]).intValue());
 			authors.add(a);
 		}
 		
@@ -97,5 +99,12 @@ public class AuthorDao {
 		}
 		
 		return nameValues;
+	}
+
+	public List<Author> getByMovement(String movement) {
+		movement = Utils.prepareForLikeStatement(movement);
+		return em.createNamedQuery(Author.GET_BY_MOVEMENT, Author.class)
+				.setParameter("movement", movement)
+				.getResultList();
 	}
 }

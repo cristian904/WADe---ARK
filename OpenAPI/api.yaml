@@ -45,6 +45,8 @@ paths:
               type: array
               items:
                 $ref: '#/definitions/NameValue'
+          404:
+            description: Id not found
   /museum/id/group-by/state:
       get:
         description: Get number of artworks in museum grouped by Display State
@@ -55,6 +57,8 @@ paths:
               type: array
               items:
                 $ref: '#/definitions/NameValue'
+          404:
+            description: Id not found
   /museum/id/group-by/author:
       get:
         description: Get number of artworks in museum grouped by Author
@@ -65,6 +69,8 @@ paths:
               type: array
               items:
                 $ref: '#/definitions/IdNameValue'
+          404:
+            description: Id not found
   /artworks:
     get:
       description: Retrieve list of artistic works that satisfy the constrains
@@ -92,6 +98,8 @@ paths:
           description: Success
           schema: 
             $ref: '#/definitions/Artworks'
+        400:
+          description: Query parameter of wrong format
         default:
           description: Unexpected Error
   /artwork:
@@ -118,18 +126,16 @@ paths:
             description: Get number of Artworks
             schema:
               type: number
-  /author:
+  /author/id/:
     get:
       description: Get Information about certain author
-      parameters:
-      - name: id
-        in: query
-        type: number
       responses:
         200:
           description: Success
           schema:
             $ref: '#/definitions/AuthorLong'
+        404:
+          description: Id not found
   /authors/total-count:
       get:
         description: Get total number of Authors on ARK
@@ -156,6 +162,8 @@ paths:
           description: Success
           schema: 
             $ref: '#/definitions/Authors'
+        400:
+          description: Query parameter of wrong format
         default:
           description: Unexpected Error
   /author/id/group-by/object-of-work:
@@ -168,6 +176,8 @@ paths:
               type: array
               items:
                 $ref: '#/definitions/NameValue'
+          404:
+            description: Id not found
   /author/id/group-by/museum:
       get:
         description: Get number of artworks of Author grouped by Museum
@@ -178,8 +188,20 @@ paths:
               type: array
               items:
                 $ref: '#/definitions/StringIdNameValue'
-        
-      
+          404:
+            description: Id not found
+  /author/id/recommendation/movements:
+    get:
+      description: Get same-movement authors for an author
+      responses:
+        200:
+          description: List of Authors arranged by movement
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AuthorsByMovements'
+        404:
+          description: Id not found
 definitions:
   Museum:
     type: object
@@ -209,7 +231,7 @@ definitions:
       authors:
         type: array
         items:
-          $ref: '#/definitions/AuthorLong'
+          $ref: '#/definitions/AuthorShort'
   Artwork:
     type: object
     properties:
@@ -261,6 +283,17 @@ definitions:
         type: string
       image:
         type: string
+  AuthorShort:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      image:
+        type: string
+      numberOfArtworks:
+        type: number
   NameValue:
     type: object
     properties:
@@ -286,4 +319,13 @@ definitions:
         type: string
       value:
         type: number
+  AuthorsByMovements:
+    type: object
+    properties:
+      movement:
+        type: string
+      authors:
+        type: array
+        items:
+          $ref: '#/definitions/AuthorShort'
       

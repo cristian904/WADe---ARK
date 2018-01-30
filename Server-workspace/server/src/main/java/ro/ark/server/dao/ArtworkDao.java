@@ -17,9 +17,11 @@ public class ArtworkDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public List<Artwork> get(String title, String author, List<String> museumIds, String repositoryId, int pageSize, int pageNumber) {
+	public List<Artwork> get(String title, String author, List<String> museumIds, String repositoryId, String objectOfWork, int pageSize, int pageNumber) {
 		title = Utils.prepareForLikeStatement(title);
 		author = Utils.prepareForLikeStatement(author);
+		objectOfWork = Utils.prepareForLikeStatement(objectOfWork);
+		
 		if(repositoryId == null || repositoryId.isEmpty()){
 			repositoryId = "%%";
 		}
@@ -28,14 +30,17 @@ public class ArtworkDao {
 			.setParameter("author", author)
 			.setParameter("museums", museumIds)
 			.setParameter("repositoryId", repositoryId)
+			.setParameter("objectOfWork", objectOfWork)
 			.setMaxResults(pageSize)
 			.setFirstResult(pageSize*pageNumber)
 			.getResultList();
 	}
 
-	public int getCount(String title, String author, List<String> museumIds, String repositoryId) {
+	public int getCount(String title, String author, List<String> museumIds, String repositoryId, String objectOfWork) {
 		title = Utils.prepareForLikeStatement(title);
 		author = Utils.prepareForLikeStatement(author);
+		objectOfWork = Utils.prepareForLikeStatement(objectOfWork);
+		
 		if(repositoryId == null || repositoryId.isEmpty()){
 			repositoryId = "%%";
 		}
@@ -45,6 +50,7 @@ public class ArtworkDao {
 			.setParameter("author", author)
 			.setParameter("museums", museumIds)
 			.setParameter("repositoryId", repositoryId)
+			.setParameter("objectOfWork", objectOfWork)
 			.getSingleResult();
 	}
 

@@ -46,7 +46,7 @@ public class MetricsController {
 	 @CrossOrigin(origins = "*")
 	 @RequestMapping("/artworks/total-count")
 	 public ResponseEntity<Integer> getArtworksCount() {
-		 Integer response = artworkService.getNumberOfArtworks("", "", "", "");
+		 Integer response = artworkService.getNumberOfArtworks("", "", "", "", "");
 		 return new ResponseEntity<>(response, HttpStatus.OK);
 	 }
 	

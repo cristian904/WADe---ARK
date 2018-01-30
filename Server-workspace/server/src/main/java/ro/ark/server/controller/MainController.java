@@ -1,6 +1,7 @@
 package ro.ark.server.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import ro.ark.server.entity.Artwork;
 import ro.ark.server.entity.Author;
 import ro.ark.server.entity.Museum;
 import ro.ark.server.entity.meta.ArtworksGetResponse;
+import ro.ark.server.entity.meta.AuthorShort;
 import ro.ark.server.entity.meta.AuthorsGetResponse;
 import ro.ark.server.service.ArtworkService;
 import ro.ark.server.service.AuthorService;
@@ -47,9 +49,12 @@ public class MainController {
 
 	 @CrossOrigin(origins = "*")
 	 @RequestMapping("/artwork/{id}")
-	 public ResponseEntity<Artwork> getArtwork(@PathVariable Long id){	 		 
+	 public ResponseEntity<Artwork> getArtwork(@PathVariable Long id){	 	
+		 Artwork a = artworkService.getSingleArtwork(id);
+		 if(a == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		 
 		 return new ResponseEntity<>(
-				 artworkService.getSingleArtwork(id),
+				 a,
 				 HttpStatus.OK);
 	 }
 
@@ -59,14 +64,23 @@ public class MainController {
 			 @RequestParam(value = "title", required = false) String title,
 			 @RequestParam(value = "author", required = false) String author,
 			 @RequestParam(value = "museum", required = false) String museum,
+			 @RequestParam(value = "objectOfWork", required = false) String objectOfWork,
 			 @RequestParam(value = "repositoryId", required = false) String repositoryId,
 			 @RequestParam(value = "pageNumber") int pageNumber,
 			 @RequestParam(value = "pageSize") int pageSize
 			 ){
 		 pageNumber-- ;
+		 
+		 List<Artwork> artworks = artworkService.getArtwork(title, author, museum, repositoryId, objectOfWork, pageSize, pageNumber);
+		 
+		 if(artworks == null || artworks.isEmpty()){
+			 return new ResponseEntity<>(null, HttpStatus.OK);
+		 }
+		 
 		 ArtworksGetResponse response =new ArtworksGetResponse(
-				 artworkService.getArtwork(title, author, museum, repositoryId, pageSize, pageNumber),
-				 artworkService.getNumberOfArtworks(title, author, museum, repositoryId));
+				 artworks,
+				 artworkService.getNumberOfArtworks(title, author, museum, repositoryId, objectOfWork));
+		 
 		 
 		 return new ResponseEntity<>(
 				 response,
@@ -82,8 +96,14 @@ public class MainController {
 			 ){
 
 		 pageNumber-- ;
+		 List<AuthorShort> authors = 
+				 authorService.getAll(name, pageSize, pageNumber)
+				 .stream()
+				 .map(a -> new AuthorShort(a))
+				 .collect(Collectors.toList());
+		 
 		 AuthorsGetResponse response = new AuthorsGetResponse(
-				 authorService.getAll(name, pageSize, pageNumber),
+				 authors,
 				 authorService.getNumberOfAuthors(name));
 		 
 		 return new ResponseEntity<>(

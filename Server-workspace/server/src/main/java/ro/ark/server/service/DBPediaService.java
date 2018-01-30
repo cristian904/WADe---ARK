@@ -13,6 +13,7 @@ import org.apache.jena.query.ResultSet;
 import org.springframework.stereotype.Service;
 
 import ro.ark.server.entity.Author;
+import ro.ark.server.entity.Museum;
 
 
 @Service
@@ -118,5 +119,40 @@ public class DBPediaService {
 		}finally{
 			qexec.close();
 		}
+	}
+	
+	
+	public Museum getMuseumInfo(Museum museum){
+		String service = "http://dbpedia.org/sparql";
+		List<String> museumNameWords =Arrays.asList(museum.getRepositoryName().split(" "));
+		
+		String filters = "";
+		for(String word : museumNameWords){
+			filters += " filter contains(?name, '" + word + "') ";
+		}
+		
+		String queryString = 
+				"PREFIX yago: <http://dbpedia.org/class/yago/> "+
+				"PREFIX dbo: <http://dbpedia.org/ontology/> " +
+				"PREFIX dbc: <http://dbpedia.org/resource/Category:> " + 
+				"PREFIX dct:  <http://purl.org/dc/terms/> " + 
+				"SELECT ?x ?name ?image ?desc WHERE { " + 
+				"{{?x rdf:type yago:Museum103800563} UNION {?x rdf:type dbo:Museum}. " + 
+				"{?x dbo:location :Romania} } UNION {?x dct:subject dbc:Art_museums_and_galleries_in_Romania} UNION {?x dct:subject dbc:Historic_house_museums_in_Romania} . " +
+				"?x foaf:name ?name . " + 
+				"OPTIONAL{ " +
+				"?x rdfs:comment ?desc " +
+				"filter langMatches( lang(?desc), 'EN' ) " + 
+				"} " + 
+				"OPTIONAL{ " +
+				"?x dbo:thumbnail ?image " +
+	 			"} " +
+	 			filters +
+				" } ";
+		Query query = QueryFactory.create(queryString);
+		QueryExecution qexec = QueryExecutionFactory.sparqlService(service, query);
+		ResultSet rs = qexec.execSelect();
+		
+		return null;
 	}
 }
