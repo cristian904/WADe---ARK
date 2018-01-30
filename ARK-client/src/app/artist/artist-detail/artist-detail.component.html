@@ -8,9 +8,18 @@
             <p><span class = "detail-names">Decedat</span> <span> {{artist.deathDate}}</span></p>
             <p><span class = "detail-names">Curent</span> <span> {{artist.current}}</span></p>
     </div>
+    <div class="detail-item-info">
+        <app-pie-grid-chart [single] = "museumsStats" [mapping] = "museumsStats" [about] = "'museum'" [view] = "[800,500]" ></app-pie-grid-chart>
+        <app-pie-chart [single] = "objectOfWorkStats"></app-pie-chart>
+    </div>
 
 </div>
 
 <div class="detail-item">
     <app-art-list [arts]="artsFromArtists"></app-art-list>
+</div>
+
+<div class ="detail-item" *ngFor = "let movements of artistsByMovement">
+    <p class = "subtitles">Alti autori din curentul {{movements.movementName}}</p>
+    <app-artist-list [artists] = "movements.authors"></app-artist-list>
 </div>

@@ -1,0 +1,14 @@
+<ngx-carousel [inputs]="carouselTile">
+    <ngx-tile (click) = "onArtistClick(artist)" NgxCarouselItem *ngFor="let artist of artists">
+        <div class = "art-item-element">
+            <div class = "art-image">
+                <img class="image" src = "{{artist.image}}" alt={{artist.name}}>
+                <div (click) = "onArtistClick(art)" class="overlay">
+                    <div class="text">{{artist.name}}<br></div>
+                </div>
+            </div>
+        </div>
+    </ngx-tile>
+    <button NgxCarouselPrev class='leftRs'>&lt;</button>
+    <button NgxCarouselNext class='rightRs'>&gt;</button>
+</ngx-carousel>

@@ -12,7 +12,7 @@ export class PieChartComponent{
   single: any[];
 
   multi: any[];
-
+  @Input()
   view: any[] = [600, 500];
 
   // options

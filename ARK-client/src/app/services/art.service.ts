@@ -25,7 +25,7 @@ export class ArtService{
         return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?repositoryId=${museumId}&pageNumber=${pageNo}&pageSize=${pageSize}`);
     }
 
-    getArtsBySearch(name, author, pageNo, pageSize){
-        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?pageNumber=${pageNo}&pageSize=${pageSize}&title=${name}&author=${author}`);
+    getArtsBySearch(name, author, type, pageNo, pageSize){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?pageNumber=${pageNo}&pageSize=${pageSize}&title=${name}&author=${author}&objectOfWork=${type}`);
     }
 }

@@ -11,7 +11,8 @@ export class BarChartComponent{
     @Input()
     single: any[];
     multi: any[];
-  
+    
+    @Input()
     view: any[] = [1000, 1000];
   
     showXAxis = true;

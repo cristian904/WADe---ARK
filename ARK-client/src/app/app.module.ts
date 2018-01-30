@@ -28,6 +28,8 @@ import { HomeComponent } from './home/home.component';
 import { MuseumGalleryComponent } from './museum/museum-gallery/museum-gallery.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { MuseumStatsComponent } from './museum/museum-stats/museum-stats.component';
+import { PieGridChartComponent } from './charts/pie-grid-chart/pie-grid-chart.component';
+import { ArtistListComponent } from './artist/artist-list/artist-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
     //Charts
     PieChartComponent,
     BarChartComponent,
+    PieGridChartComponent,
     //Museums
     MuseumComponent,
     MuseumDetailComponent,
@@ -59,7 +62,8 @@ const appRoutes: Routes = [
     ArtListComponent,
     //Artists
     ArtistComponent,
-    ArtistDetailComponent
+    ArtistDetailComponent,
+    ArtistListComponent
   ],
   imports: [
     FormsModule,

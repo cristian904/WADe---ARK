@@ -24,4 +24,15 @@ export class ArtistService{
     getArtistForSearch(name, pageNo, pageSize){
         return this.http.get(`${APP_CONSTANTS.ENDPOINT}/authors?pageNumber=${pageNo}&pageSize=${pageSize}&name=${name}`);
     }
+
+    getMuseumByAuthor(authorId){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/author/${authorId}/group-by/museum`);
+    }
+    getObjectOfWorkByAuthor(authorId){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/author/${authorId}/group-by/object-of-work`);
+    }
+
+    getMovementsOfArtist(authorId){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/author/${authorId}/recommendation/movements`);
+    }
 }
