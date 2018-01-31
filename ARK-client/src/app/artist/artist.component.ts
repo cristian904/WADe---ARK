@@ -18,11 +18,14 @@ export class ArtistComponent{
     form: NgForm;
     formSubmited = false;
 
+    public loading = true;
+
     constructor(private artistService: ArtistService, private route: ActivatedRoute, private router: Router){
           }
 
     ngOnInit(){
         this.route.queryParams.subscribe((queryParams) => {
+            this.loading = false;
             this.p = queryParams['pageNumber'];
             this.pageSize = queryParams['pageSize'];
             if(!this.formSubmited){
