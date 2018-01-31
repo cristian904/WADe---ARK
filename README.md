@@ -9,6 +9,8 @@ Our solution offers an interactive way to explore the Romanian Heritage. Using t
 Our main purpose is easing the access to the Works of art in Romanian museums. Besides that we offer an easy way to visualize data and statistics around museums, artists and pieces of art.
 
 The data is given by data.gov.ro(http://data.gov.ro/dataset/bunuri-culturale-clasate-arta) and furtherly joined with DBpedia data and Getty Vocabularies for completeness.
+## Demo Video
+https://youtu.be/WUIeGjoQGeg
 
 ## Progress
 15/11/2017
@@ -21,6 +23,10 @@ The data is given by data.gov.ro(http://data.gov.ro/dataset/bunuri-culturale-cla
  - Created Scholarly HTML documentation
  - Developed Arhitecture Diagram and Use Case diagram
  - Created Angular Client Boilerplate project
+ 
+15/1/2018 - 31/1/2018
+ - Actual implementation of the solution
+ - Updated the documentation
 
 ## Team
 1) Padurariu Constantin Cristian
