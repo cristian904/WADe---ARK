@@ -1,0 +1,94 @@
+<head >
+        <meta charset="UTF-8">
+        <title>Artwork Provenance</title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <article resource="#" typeof="schema:ScholarlyArticle">
+    <header>
+        <h1 property="schema:name">ARK</h1>
+        <p role="doc-subtitle" property="schema:alternateName">
+        Artwork Provenance
+        </p>
+    </header>
+    <meta property="schema:accessibilityFeature" content="alternativeText">
+    <meta property="schema:accessibilityFeature" content="MathML">
+    <meta property="schema:accessibilityHazard" content="noFlashingHazard">
+    </article>
+    <section style="width: 700px;margin: auto" typeof="sa:AuthorsList">
+    <h2>Authors</h2>
+    <ul>
+        <li typeof="sa:ContributorRole" property="schema:author">
+        <span typeof="schema:Person"
+            <meta property="schema:givenName" content="Cristian">
+            <meta property="schema:additionalName" content="Constantin">
+            <meta property="schema:familyName" content="Padurariu">
+            <span property="schema:name">Padurariu Constantin Cristian</span>
+        </span>
+        <a href="#sf" property="sa:roleAffiliation" >contributor</a>,
+        <a href="#umich" property="sa:roleAffiliation" >master student</a>
+        <ul>
+            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+            <a href="mailto:cristian.padurariu94@gmail.com"
+                property="schema:email">cristian.padurariu94@gmail.com</a>
+            </li>
+        </ul>
+        </li>
+        <li typeof="sa:ContributorRole" property="schema:author">
+            <span typeof="schema:Person"
+            <meta property="schema:givenName" content="Dragos">
+            <meta property="schema:familyName" content="Silion">
+            <span property="schema:name">Silion Dragos</span>
+        </span>
+        <a href="#sf" property="sa:roleAffiliation" >contributor</a>,
+        <a href="#umich" property="sa:roleAffiliation" >master student</a>
+        <ul>
+            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+            <a href="mailto:silidragos@gmail.com"
+                property="schema:email">silidragos@gmail.com</a>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </section>
+    <div  style="text-align: center;width: 1000px;margin:auto">
+        <section class="identation">
+            <h3>Case study 1 (Museum exploration)</h3>
+            <p>This case study shows how users can explore museums from all over Romania. The ARK interface presents a visualisation of the country with all museums spread
+                across the map. A user can zoom in on the city they like and select which museum galery he wants to visit. He will click on the museum location and them view
+                all the artwork from the gallery (<i>Figure 1</i>). </p>
+                <figure typeof="sa:image">
+                    <img src="./img/map-view.png"  width="600px"/>
+                    <figcaption><i>Figure 1: Visualisation of museums on the map</i></figcaption>
+                </figure>
+            <p>The user will be redirected to a new page where he can see different statistics on the selected museum and also all the works of art available.
+                Available statistics:
+                <ul>
+                    <li> Pie chart describing the state of the artworks: (good state, bad state, mediocre state etc.) (<i>Figure 2</i>)</li>
+                    <li> Bar plot showing the artists present in the museum and how many works they have there. (<i>Figure 3</i>)</li>
+                    <li> Bar plot describing what types of work is available in the museum and how many of them. (<i>Figure 4</i>)</li>
+                    <figure typeof="sa:image">
+                            <img src="./img/pie-chart-state.png"  width="400px"/>
+                            <figcaption><i>Figure 2: State of artworks</i></figcaption>
+                    </figure>
+                    <figure typeof="sa:image">
+                            <img src="./img/bar-plot-artists.png"  width="600px"/>
+                            <figcaption><i>Figure 3: Number of artists</i></figcaption>
+                    </figure>
+                    <figure typeof="sa:image">
+                            <img src="./img/bar-plot-types.png"  width="600px"/>
+                            <figcaption><i>Figure 4: Types of work</i></figcaption>
+                    </figure>
+                    <p>Bellow these statistics you can see all the available artwork from the selected museum. Hovering over the image will give you some general information and then
+                        the user can click on it and get full details about the art work. (<i>Figure 5</i>)
+                    </p>
+                    <figure typeof="sa:image">
+                            <img src="./img/art-gallery.png"  width="600px"/>
+                            <figcaption><i>Figure 5: Art gallery of museum</i></figcaption>
+                    </figure
+                </ul>
+            </p>
+        </section>
+
+
+    </div>
+
