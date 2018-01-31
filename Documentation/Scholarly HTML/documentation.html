@@ -72,10 +72,18 @@
                 <ol>
                     <li><a href="#client">Client</a></li>
                     <li><a href="#server">Server</a></li>
-                    <li><a href="#xml-to-db">Server</a></li>
+                    <li><a href="#xml-to-db">XML-to-Database Service</a></li>
                     <li><a href="#database">Database</a></li>
                     <li><a href="#overview">Overview</a></li>
                 </ol>
+                </li>
+                <li> <a href="#functionalities">Functionalities</a>
+                    <ol>
+                        <li><a href="#museums">Museum exploring</a></li>
+                        <li><a href="#artists">Artist exploring</a></li>
+                        <li><a href="#arts">Art exploring</a></li>
+                        <li><a href="#recommendations">Recommendation</a></li>
+                    </ol>
                 </li>
                 <li><a href="#conclusion">Conclusion</a></li>
                 <li><a href="#bibliography">Bibliography</a>
@@ -93,7 +101,7 @@
             <h2>Web services and APIs</h2>
             <p>In order to be as real-time as possible our Database will hold most of it's data just for Caching data and for the generation of statistics. However, for gathering the data we take all the information from external sources such as DBPedia, Romanian Patrimonium or Google Places (for locations). </p>
             <h3 id="govData">Governmental Data</h3>
-            <p>The Romanian government offers, freely, multipel datasets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. However, the information extracted from here is incomplete. That’s why we need the help of DBPedia in achieving an exhaustive search. </p>
+            <p>The Romanian government offers, freely, multiple datasets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. However, the information extracted from here is incomplete. That’s why we need the help of DBPedia in achieving an exhaustive search. </p>
             <p> It's main value comes from having detailed information about artworks, that wouldn't be found on Wikipedia or other APIs otherwise. For ARK we took information such as: </p>
             <ul>
                 <li>Title</li>
@@ -141,6 +149,11 @@
         </section>
         <section class="identation" id = "arhitecture">
             <h2>Architecture</h2>
+            <h3 id="overview">Overview</h3>
+            <figure typeof="sa:image">
+            <img src="./img/arhitecture-diagram-new.png"  width="800px"/>
+            <figcaption><i>The diagram describes how all the major components are interconnected in the context of the application</i></figcaption>
+            </figure>
             <h3 id="client">Client</h3>
             <p>The client will be a web interface developed with Angular 5. We choose Angular because of its strong performance. It can be easily deployed on any web server and it offers a large set of tools that ease the development process. 
             <b>Angular is a client side framework of JavaScript which is based on MVC Architecture</b> and provides a Single-page application solution for dynamic websites. Angular’s strong points are:</p>
@@ -151,14 +164,26 @@
                 <li>Modularity and Scalibility for Team Development</li>
             </ul>
             <p>So, in Angular, code-re usability can be achieved using Modules, Components. It provides the sharing of the code within angular Application. It also Provides ‘Dependency Injection’ (DI) and ‘Angular Routing’ features which provides the re usability of the code again and again. It provides a modular and highly scalable code to enhance the speed of development.</p>
+            <p>In this case our Angular 5 application is very well-structured. It is split into multiple components encapsulation specific elements of the page. You can see the general arhitecture of the project below: </p>
+            <img src="./img/FE-comp.png" height="500px"  width="180px"/>
+            <figcaption><i>Front-end arhitecture</i></figcaption>
+            </figure>
+            <p>As the client side is separated from the server side, we also used some Angular specific functionalities like Injectable services which call the server application endpoints, which send back
+                a JSON format response.</p>
+                <p>The specifications of the server API is available <a href="../../OpenAPI/api.yaml">here</a> using OpenAPI.
+            <p>The data recieved from the server is then transformed into models that facilitate the front-end developed by proving an easy way to manipulate the server data.</p>
+            <p>When developing the project we also used some external Angular 5 modules. We used <a href="http://michaelbromley.github.io/ngx-pagination">ngx-pagination</a>, which provided a quick solution
+            to displaying the items in tables which multiple pages. <a href="https://github.com/swimlane/ngx-charts">Ngx-charts</a> is another component we used fro graphical representation of statistical data and 
+            for a smooth display of lists of artwork and artists we used <a href="https://github.com/sheikalthaf/ngx-carousel">ngx-carousel</a>.</p>
+            </p>
             <h3 id="server">Server</h3>
                 <p><b>The Spring Framework</b> is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
                 Spring framework provides flexibility to configure beans in multiple ways such as XML, Annotations, and JavaConfig. With the number of features increased the complexity also gets increased and configuring Spring applications becomes tedious and error-prone.</p>
-                <p>The main components of Spring used where Spring Boot, Spring MCV and Spring REST</p>
-                <p>The databased was accessed using JPA as an ORM</p>
-                <p>Besides offering the endpoints, the server was also responsible of making the calls to both DBPedia and the PostgreSQL Database, cleaning up data from both those Data Sources and caching information. Furthermore, on the server the statistics and recommendations were computed and offered</p>
-                <p>The server is deployed on a Digital Ocean Droplet, in Cloud, on a Apache Tomcat Server. <a href="http://tomcat.apache.org/"> Apache Tomcat</a> is the most popular open-source container for Java Technologies </p>
-                <p> The access to DBPedia was made using <a href="https://jena.apache.org/">Apache Jena</a> </p>
+                <p>The main components of Spring used where Spring Boot, Spring MCV and Spring REST.</p>
+                <p>The databased was accessed using JPA as an ORM.</p>
+                <p>Besides offering the endpoints, the server was also responsible of making the calls to both DBPedia and the PostgreSQL Database, cleaning up data from both those Data Sources and caching information. Furthermore, on the server the statistics and recommendations were computed and offered.</p>
+                <p>The server is deployed on a Digital Ocean Droplet, in Cloud, on a Apache Tomcat Server. <a href="http://tomcat.apache.org/"> Apache Tomcat</a> is the most popular open-source container for Java Technologies. </p>
+                <p> The access to DBPedia was made using <a href="https://jena.apache.org/">Apache Jena</a>. </p>
             <figure typeof="sa:image">
                 <img src="./img/sparql-artist.png"  width="800px"/>
                 <figcaption><i>SPARQL query for getting artist information</i></figcaption>
@@ -184,18 +209,33 @@
             <h3 id="database">Database</h3>
             <p>For persistence we will use <b>PostgreSQL</b>, a popular open-source SQL Database management system. As the information provided my the Romanian government on heritage is stored in a XML file we will extract the useful information and store it in a relational database, for easier access and quering.</p>
             <p> Besides the information in Romanian Heritage XML, we also store the data queried from DBPedia. Since information about art, artists and museums rarely changes we use it to generate recommendations and statistics. However, whenever information about a certain Author/Museum is queried for, we also update it in our database.</p>
-            <h3 id="overview">Overview</h3>
             <figure typeof="sa:image">
-            <img src="./img/uml.png"  width="600px"/>
-            <figcaption><i>The diagram describes how all the major components are interconnected in the context of the application</i></figcaption>
-            </figure>
-            <p>So the application, hosted on a web server will query the relational database (obtained from <b>Gov Data XML</b>) for information about Romanian artistic attractions. As the information provided from this query is limited, the client application will call the <b>DBPedia API</b> to further enrich the information, based on the results from the first query. We could also use <b>Getty Vocabularies</b> instead of DBPedia for gathering this information, but it’s not decided yet.</p>
-            
+                    <img src="./img/DB-uml.png"  width="700px"/>
+                    <figcaption><i>Database diagram</i></figcaption>
+                </figure>
+        </section>
+        <section class="identation" id="functionalities">
+                <h2>Functionalities</h2>
+                <h3 id = "museums">Museum exploring</h3>
+                <p>The ARK interface presents a visualisation of the country with all museums spread across the map. A user choose on the map the city they like and select which museum galery he wants to visit. He will click on the museum location and them view all the artwork from the gallery. For each gallery there 
+                    are specific statistics that you can investigate regarding authors, types of work, state of the artworks.
+                </p>
+                <h3 id = "artists">Artist exploring</h3>
+                <p>Also a user can browse artists and their artworks. By going on the artists page the user can see a table with all artists present in the romanian museums. They can also filter them by name if to find a specific author.
+                    The user can  navigate to the page of the artist where he can see some general information about him (birth date, death date, currents) and statistics about the museums where he can be found. Also, on this page there is a list of all the artwork from this author.
+                </p>
+                <h3 id = "arts">Art exploring</h3>
+                <p>The user can also ook-up art. By going to the artwork page, the user can see a table with all available romanian artworks. He also has the posibily of filtering them by name, author and type of work.</p>
+                <h3 id = "recommendations">Recommendations</h3>
+                <p>ARK offers recommandations for artworks and artists. When viewing information about a certain artwork you will get suggestions of paintings from the same author and atworks available in the same museum as the selected art.
+                    When studing an artist you can view the ARK suggestions list and find out what other artist belong to the same movement as him and some of his most interesing artworks.
+                </p>
+                <p>Mock-ups describing some of ARKs use-cases can be found <a href="./user-guide.html">here</a>.</p>
         </section>
         <section class = "identation" id="conclusion" role="doc-conclusion">
             <h2>Conclusion</h2>
-            In conclusion, this report highlights the the main concepts that will help us in the development of this project. Further, we should investigate in depth every method listed above to try and see what is the best way to combine them in order to achive our goal.
-            So, the idea presented here is a preliminary step that represents our overall, outside the box view, of what this project might look like. 
+            In conclusion, this resource is a well-documented report of the technologies and concepts that were used in developing this project. The report highlights the state of the art concepts used in 
+            exploiting RDF resources. The projects shows the power of the format and how it can be used in practice to make smart and interesing web application. 
         </section>
             <section class="identation" id="bibliography">
             <h2>Bibliography</h2>
@@ -235,6 +275,27 @@
                         <a href="https://angular.io/">Angular</a>
                     </cite>
                 </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="https://github.com/sheikalthaf/ngx-carousel"
+                property="schema:citation">
+                <cite property="schema:name">
+                    <a href="https://github.com/sheikalthaf/ngx-carousel">Ngx-carousel</a>
+                </cite>
+            </li>
+            <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="https://github.com/swimlane/ngx-charts"
+                property="schema:citation">
+                <cite property="schema:name">
+                    <a href="https://github.com/swimlane/ngx-charts">Ngx-charts</a>
+                </cite>
+            </li>
+            <li typeof="schema:WebPage" role="doc-biblioentry"
+                resource="http://michaelbromley.github.io/ngx-pagination"
+                property="schema:citation">
+                <cite property="schema:name">
+                    <a href="http://michaelbromley.github.io/ngx-pagination">Ngx-pagination</a>
+                </cite>
+            </li>
                 <li typeof="schema:WebPage" role="doc-biblioentry"
                 resource="https://developers.google.com/places/"
                 property="schema:citation">
