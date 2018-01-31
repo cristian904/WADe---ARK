@@ -31,8 +31,4 @@ export class PieChartComponent{
 
   constructor() {
   }
-  
-  onSelect(event) {
-    console.log(event);
-  }
 }
