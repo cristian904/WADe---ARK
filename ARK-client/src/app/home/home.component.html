@@ -4,7 +4,7 @@
     <div class="home_text">
         <h1> ARK  </h1>
         <h3> Explorează muzeele și lucrările artistice din România </h3>
-        <h4> {{museumCount}} muzee, {{artistCount}} artiști, {{artCount}} lucrări</h4>
+        <h4> <span countUp endVal={{museumCount}}>0</span> muzee, <span countUp endVal={{artistCount}}>0</span> artiști, <span countUp endVal={{artCount}}>0</span> lucrări</h4>
         <button [routerLink] = "['/museums']"> Explorează </button>
     </div>
     <div class="overlay"></div>

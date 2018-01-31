@@ -29,8 +29,6 @@ export class ArtDetailComponent implements OnInit{
                     const art = response.json();
                     this.art =  new Art(art.id, art.title, art.author.name, art.displayYear, art.objectOfWork, "", art.description,art.measurements, art.imageUrl, art.state, art.repositoryId);
                     this.authorId = art.author.id;
-                    this.fullDescription = this.art.description.slice();
-                    this.art.description = this.art.description.substring(0, 100) + "...";
                     this.getArtsByArtist();
                     this.getArtsByMuseum();
                     this.getMuseumName();

@@ -34,7 +34,7 @@ export class ArtistComponent{
                 this.getArtistsForSearch(this.form.value.searchName);
             }
         });
-        this.getArtistsForPage();
+        // this.getArtistsForPage();
     }
 
     onPageChange(event){

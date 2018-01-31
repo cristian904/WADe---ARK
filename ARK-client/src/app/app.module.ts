@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import {AgmCoreModule} from '@agm/core';
+import {CountUpModule} from 'countup.js-angular2';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -76,7 +77,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDdbqZvUIy46zJr80oldJGLOve1BdO1pt0'
-    })
+    }),
+    CountUpModule
   ],
   providers: [ArtService, MuseumService, ArtistService],
   bootstrap: [AppComponent]
