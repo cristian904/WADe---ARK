@@ -77,13 +77,6 @@
                     <li><a href="#overview">Overview</a></li>
                 </ol>
                 </li>
-                <li><a href="#workflow">User workflows</a></li>
-                <ol>
-                    <li><a href="#museums">Museums</a></li>
-                    <li><a href="#worksOfArtList">Works of Art list</a></li>
-                    <li><a href="#worksOfArtView">Work of Art view</a></li>
-                    <li><a href="#artists">Artists</a></li>                
-                </ol>
                 <li><a href="#conclusion">Conclusion</a></li>
                 <li><a href="#bibliography">Bibliography</a>
                 </li>
@@ -161,6 +154,8 @@
             <h3 id="server">Server</h3>
                 <p><b>The Spring Framework</b> is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
                 Spring framework provides flexibility to configure beans in multiple ways such as XML, Annotations, and JavaConfig. With the number of features increased the complexity also gets increased and configuring Spring applications becomes tedious and error-prone.</p>
+                <p>The main components of Spring used where Spring Boot, Spring MCV and Spring REST</p>
+                <p>The databased was accessed using JPA as an ORM</p>
                 <p>Besides offering the endpoints, the server was also responsible of making the calls to both DBPedia and the PostgreSQL Database, cleaning up data from both those Data Sources and caching information. Furthermore, on the server the statistics and recommendations were computed and offered</p>
                 <p>The server is deployed on a Digital Ocean Droplet, in Cloud, on a Apache Tomcat Server. <a href="http://tomcat.apache.org/"> Apache Tomcat</a> is the most popular open-source container for Java Technologies </p>
                 <p> The access to DBPedia was made using <a href="https://jena.apache.org/">Apache Jena</a> </p>
@@ -185,38 +180,6 @@
             </figure>
             <p>So the application, hosted on a web server will query the relational database (obtained from <b>Gov Data XML</b>) for information about Romanian artistic attractions. As the information provided from this query is limited, the client application will call the <b>DBPedia API</b> to further enrich the information, based on the results from the first query. We could also use <b>Getty Vocabularies</b> instead of DBPedia for gathering this information, but it’s not decided yet.</p>
             
-        </section>
-        <section class="identation" id = "workflow">
-            <h2 id="workflow"> User Workflows</h2>
-            <p> The whole application revolves around Romanian museums and what works of art can be found in them. It can be used in both exploring generic information and statistics and also specific searches about Works of Art, Museums or Artists.</p>
-            <h3 id = "museums">Museums</h3>
-            <figure typeof="sa:image">
-                <img src="./img/index.png" width="600px"/>
-                <figcaption><i>Mockup for the main page</i></figcaption>
-            </figure>
-            <p> The main page is represented by the <b>Romanian Map</b> on which all the museums inside The Romanian Heritage dataset can be found. Their information is updated and completed by DBpedia informations. On clicking on each museum figure, further information is available, including a few statistics and a hyperlink to all the Art Works located here.
-            <h3 id="workOfArtList">Works of Art list</h3>
-            <figure typeof="sa:image">
-                <img src="./img/muzeu.png" width="600px"/>
-                <figcaption><i>Mockup for how the museum view</i></figcaption>
-            </figure>
-            <figure typeof="sa:image">
-                <img src="./img/art.png" width="600px"/>
-                <figcaption><i>Mockup for the Art exploration view</i></figcaption>
-            </figure>
-            <p>Lists with works of art can be accesed in both museum view and All works of art view. They can be filtered by both name and artist's name. On click further information can be achieved. This page also contains hyperlinks to more info about the artists.</p> 
-            <h3 id="workOfArtView">Work of Art view</h3>
-            <figure typeof="sa:image">
-                <img src="./img/art-modal.png" width="600px"/>
-                <figcaption><i>Mockup for the Work of Art details modal</i></figcaption>
-            </figure>
-            <p> All the information gather from both the gov data and DBpedia is available in this view for a piece of art. Besides that, recommendations are offered for Art in the same time period, same current or artists with resembling style.
-            <h3>Artists</h3>  
-            <figure typeof="sa:image">
-                <img src="./img/artist-modal.png" width="600px"/>
-                <figcaption><i>Mockup for the Artist details modal</i></figcaption>
-            </figure>
-            <p> Here, data about artists can be found. Besides pure data, you can access the museums where their works can be found, their paintings and also some statistics.</p>
         </section>
         <section class = "identation" id="conclusion" role="doc-conclusion">
             <h2>Conclusion</h2>
