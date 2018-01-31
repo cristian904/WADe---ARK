@@ -170,6 +170,17 @@
             <h3 id="xml-to-db">XML-to-Database Service</h3>
                 <p>In order for the Romanian Heritage XML to be parsed, we created a small Java service to take the XML, parse it and take just the useful information from it.</p>
                 <p>XML-to-Database Service uses SAX in order to parse the XML. It adds the new information to our PostgreSQL database and updates the old rows</p>
+                <p> The main namespace inside Romanian Heritage XML is lido: . The elements we regarded are: </p>
+                <ul>
+                    <li>lido:lidoRecID</li>
+                    <li>lido:objectOfWorkType</li>
+                    <li>lido:classification</li>
+                    <li>lido:titleWrap</li>
+                    <li>lido:eventActor - Author</li>
+                    <li>lido:repositoryWrap - Museum</li>
+                    <li>lido:linkResource - thumbnail</li>
+                    <li>lido:objectMeasurementsSet</li>
+                </ul>
             <h3 id="database">Database</h3>
             <p>For persistence we will use <b>PostgreSQL</b>, a popular open-source SQL Database management system. As the information provided my the Romanian government on heritage is stored in a XML file we will extract the useful information and store it in a relational database, for easier access and quering.</p>
             <p> Besides the information in Romanian Heritage XML, we also store the data queried from DBPedia. Since information about art, artists and museums rarely changes we use it to generate recommendations and statistics. However, whenever information about a certain Author/Museum is queried for, we also update it in our database.</p>
@@ -194,6 +205,27 @@
                     property="schema:citation">
                     <cite property="schema:name">
                         <a href="https://spring.io/">Spring Framework</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://tomcat.apache.com/"
+                    property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://tomcat.apache.com/">Apache Tomcat</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://jena.apache.com/"
+                    property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://jena.apache.com/">Apache Jena</a>
+                    </cite>
+                </li>
+                <li typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://www.digitalocean.com/"
+                    property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://www.digitalocean.com/">Digital Ocean</a>
                     </cite>
                 </li>
                 <li typeof="schema:WebPage" role="doc-biblioentry"
