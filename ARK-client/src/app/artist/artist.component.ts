@@ -34,7 +34,7 @@ export class ArtistComponent{
                 this.getArtistsForSearch(this.form.value.searchName);
             }
         });
-        // this.getArtistsForPage();
+         this.getArtistsForPage();
     }
 
     onPageChange(event){
@@ -60,7 +60,7 @@ export class ArtistComponent{
         this.artistService.getArtistForSearch(name, this.p, this.pageSize).subscribe( (response) =>{
             response = response.json();
             this.total = response["numberOfAuthors"];
-            this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, artist.birthDate, artist.movementName[0], artist.deathDate, artist.image));
+            this.artists = response['authors'].map( artist => new Artist(artist.id, artist.name, "", "", "", artist.image));
             console.log(this.artists);
         });
     }
