@@ -22,6 +22,7 @@
         }
         h1{
             font-size: 7em;
+            text-decoration: underline;
         }
         h3{
             font-size: 2em;
@@ -36,6 +37,12 @@
             font-weight: bold;
             font-size: 1em;
             margin-left: calc(50% - 63px);
+            cursor: pointer;
+
+            transition: all .2s ease-in-out;
+            &:hover{
+                font-size: 1.1em;
+            }
         }
     }
 

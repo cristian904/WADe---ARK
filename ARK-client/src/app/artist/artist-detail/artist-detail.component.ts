@@ -22,6 +22,8 @@ export class ArtistDetailComponent implements OnInit{
     public artistsByMovement;
     carouselTile: NgxCarousel;
 
+    public loading = true;
+
 
     constructor(private museumService: MuseumService, private artistService: ArtistService, private artService:ArtService, private route: ActivatedRoute){}
 
@@ -41,6 +43,7 @@ export class ArtistDetailComponent implements OnInit{
         this.route.params.subscribe(
             params => {
                 this.artistService.getArtistById(params['id']).subscribe((response) => {
+                    this.loading = false;
                     const artist = response.json();
                     this.artist =  new Artist(artist.id, artist.name, artist.birthDate, "not available", artist.deathDate, artist.image);
                     if(this.artist.birthDate != null){

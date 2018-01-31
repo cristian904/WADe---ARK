@@ -4,7 +4,7 @@
     </div>
     <div class="detail-item-info">
             <p class = "title">{{artist.name}}</p>
-            <p><span class = "detail-names">Nascut</span> <span> {{artist.birthDate}}</span></p>
+            <p><span class = "detail-names">Născut</span> <span> {{artist.birthDate}}</span></p>
             <p><span class = "detail-names">Decedat</span> <span> {{artist.deathDate}}</span></p>
             <p><span class = "detail-names">Curent</span> <span> {{artist.current}}</span></p>
     </div>
@@ -36,10 +36,15 @@
     </div>
 
     <div class ="detail-item" *ngFor = "let movements of artistsByMovement">
-        <h2 class = "subtitles">Alti autori din curentul {{movements.movementName}}</h2>
+        <h2 class = "subtitles">Alți autori din curentul {{movements.movementName}}</h2>
         <br/>
         <div>
             <app-artist-list [artists] = "movements.authors"></app-artist-list>
         </div>
     </div>
+</div>
+
+
+<div *ngIf="loading" class="loading">
+    Loading
 </div>

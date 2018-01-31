@@ -20,10 +20,12 @@ export class ArtComponent implements OnInit{
     formSubmited = false;
     form: NgForm;
 
+    public loading = true;
     constructor(private artService: ArtService, private route: ActivatedRoute, private router: Router){}
 
     ngOnInit(){
         this.route.queryParams.subscribe((queryParams) => {
+            this.loading = false;
             this.p = queryParams['pageNumber'];
             this.pageSize = queryParams['pageSize'];
             if(!this.formSubmited){

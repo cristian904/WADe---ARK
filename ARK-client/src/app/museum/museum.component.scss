@@ -6,13 +6,15 @@
     .map-canvas{
         margin-top: 40px;
         margin-left:calc(50% - 400px);
+        border: 2px solid black;
+        width: 800px;
 
         .info-window{
             height:50px;
         }
         .google-map{
             height: 550px;
-            width: 800px;
+            /* width: 800px;*/
             
         }
     }

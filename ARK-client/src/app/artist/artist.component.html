@@ -1,18 +1,18 @@
-<h1>Exploreaza artisti</h1>
+<h1>Explorează artiști</h1>
 <form (ngSubmit) = "onSubmit(searchForm)" #searchForm="ngForm">
-    <div style="width: 25%" class="search-form">
+    <div class="search-form">
         <div class="search-form-item">
             <label for="name">Nume </label>
             <input name="searchName" type="text" ngModel>
         </div>
-        <button class="search-button" type="submit"> Cauta</button>
+        <button class="search-button" type="submit"> Caută</button>
     </div>
 </form>
 <div class= "page-controls">
     <pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
 
-<table>
+<table class="artist-table">
     <thead>
         <tr>
             <td>Artist</td>
@@ -30,4 +30,8 @@
 </table>
 <div class= "page-controls">
 <pagination-controls  (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
+
+<div *ngIf="loading" class="loading">
+    Loading
 </div>
