@@ -23,6 +23,9 @@ https://youtu.be/WUIeGjoQGeg
  - Created Scholarly HTML documentation
  - Developed Arhitecture Diagram and Use Case diagram
  - Created Angular Client Boilerplate project
+15/1/2018 - 31/1/2018
+ - Actual implementation of the solution
+ - Updated the documentation
 
 ## Team
 1) Padurariu Constantin Cristian
