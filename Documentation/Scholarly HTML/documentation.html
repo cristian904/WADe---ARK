@@ -163,11 +163,21 @@
                 Spring framework provides flexibility to configure beans in multiple ways such as XML, Annotations, and JavaConfig. With the number of features increased the complexity also gets increased and configuring Spring applications becomes tedious and error-prone.</p>
                 <p>Besides offering the endpoints, the server was also responsible of making the calls to both DBPedia and the PostgreSQL Database, cleaning up data from both those Data Sources and caching information. Furthermore, on the server the statistics and recommendations were computed and offered</p>
                 <p>The server is deployed on a Digital Ocean Droplet, in Cloud, on a Apache Tomcat Server. <a href="http://tomcat.apache.org/"> Apache Tomcat</a> is the most popular open-source container for Java Technologies </p>
+                <p> The access to DBPedia was made using <a href="https://jena.apache.org/">Apache Jena</a> </p>
+            <figure typeof="sa:image">
+                <img src="./img/sparql-artist.png"  width="800px"/>
+                <figcaption><i>SPARQL query for getting artist information</i></figcaption>
+            </figure>
+            <figure typeof="sa:image">
+                <img src="./img/sparql-museum.png"  width="800px"/>
+                <figcaption><i>SPARQL query for getting information about museums</i></figcaption>
+            </figure>
             <h3 id="xml-to-db">XML-to-Database Service</h3>
                 <p>In order for the Romanian Heritage XML to be parsed, we created a small Java service to take the XML, parse it and take just the useful information from it.</p>
                 <p>XML-to-Database Service uses SAX in order to parse the XML. It adds the new information to our PostgreSQL database and updates the old rows</p>
             <h3 id="database">Database</h3>
-            <p>For persistence we will use <b>PostgreSQL</b>. As the information provided my the Romanian government on heritage is stored in a XML file we will extract the useful information and store it in a relational database, for easier access and quering.</p>
+            <p>For persistence we will use <b>PostgreSQL</b>, a popular open-source SQL Database management system. As the information provided my the Romanian government on heritage is stored in a XML file we will extract the useful information and store it in a relational database, for easier access and quering.</p>
+            <p> Besides the information in Romanian Heritage XML, we also store the data queried from DBPedia. Since information about art, artists and museums rarely changes we use it to generate recommendations and statistics. However, whenever information about a certain Author/Museum is queried for, we also update it in our database.</p>
             <h3 id="overview">Overview</h3>
             <figure typeof="sa:image">
             <img src="./img/uml.png"  width="600px"/>
