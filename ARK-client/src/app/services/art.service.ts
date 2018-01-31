@@ -28,4 +28,7 @@ export class ArtService{
     getArtsBySearch(name, author, type, pageNo, pageSize){
         return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks?pageNumber=${pageNo}&pageSize=${pageSize}&title=${name}&author=${author}&objectOfWork=${type}`);
     }
+    getTotalArtCount(){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/artworks/total-count`);
+    }
 }

@@ -20,11 +20,24 @@ export class ArtistDetailComponent implements OnInit{
     public museumsStats;
     public objectOfWorkStats;
     public artistsByMovement;
+    carouselTile: NgxCarousel;
 
 
     constructor(private museumService: MuseumService, private artistService: ArtistService, private artService:ArtService, private route: ActivatedRoute){}
 
     ngOnInit(){
+        this.carouselTile = {
+            grid: {xs: 1, sm: 1, md: 1, lg: 1, all: 0},
+            slide: 1,
+            speed: 600,
+            animation: 'lazy',
+            point: {
+              visible: true
+            },
+            load: 1,
+            touch: true,
+            easing: 'ease'
+          }
         this.route.params.subscribe(
             params => {
                 this.artistService.getArtistById(params['id']).subscribe((response) => {

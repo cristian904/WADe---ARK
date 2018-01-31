@@ -24,4 +24,8 @@ export class MuseumService{
     getMuseumAuthorsStatistics(museumId){
         return this.http.get(`${APP_CONSTANTS.ENDPOINT}/museum/${museumId}/group-by/author`);
     }
+
+    getTotalMuseumCount(){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/museums/total-count`);
+    }
 }

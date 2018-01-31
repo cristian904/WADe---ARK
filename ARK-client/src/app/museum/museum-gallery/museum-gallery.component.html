@@ -1,6 +1,25 @@
 <div class="museum-gallery__wrapper">
   <h1 class="title">{{museum.name}} - {{capitalizeFirstLetter(museum.location)}} </h1> 
   <h2>(<a [routerLink]="['stats']">Statistici</a>)</h2>
+  
+  <h3> Starea lucrărilor</h3>
+
+  <ngx-carousel [inputs] = "carouselTile">
+    <ngx-tile NgxCarouselItem>
+      <app-pie-chart [single]="stateOfWorks"></app-pie-chart>
+    </ngx-tile>
+    <ngx-tile NgxCarouselItem>
+      <h3> Număr de lucrări per artist</h3>
+      <app-bar-chart [single]="authors" [yAxisLabel]="'Artisti'" [xAxisLabel]="'Numar lucrari'" [view]= "[1000, authorLength]"></app-bar-chart>
+    </ngx-tile>
+    <ngx-tile NgxCarouselItem>
+      <h3> Număr de lucrări per tip de lucrare</h3>
+      <app-bar-chart [single]="objectOfWorks" [yAxisLabel]="'Tip lucrare'" [xAxisLabel]="'Numar lucrari'" [view]="[1000, objectLength]"></app-bar-chart>
+    </ngx-tile>
+    <button NgxCarouselPrev class='leftRs'>&lt;</button>
+    <button NgxCarouselNext class='rightRs'>&gt;</button> 
+</ngx-carousel>
+
   <h3>Lucrări de artă</h3>
   <div class="image-gallery" *ngFor="let art of artGallery">
     <img class="image" src="{{art.imagePath}}" alt={{art.name}}>

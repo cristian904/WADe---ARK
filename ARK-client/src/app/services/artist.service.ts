@@ -35,4 +35,8 @@ export class ArtistService{
     getMovementsOfArtist(authorId){
         return this.http.get(`${APP_CONSTANTS.ENDPOINT}/author/${authorId}/recommendation/movements`);
     }
+
+    getTotalArtistCount(){
+        return this.http.get(`${APP_CONSTANTS.ENDPOINT}/authors/total-count`);
+    }
 }
