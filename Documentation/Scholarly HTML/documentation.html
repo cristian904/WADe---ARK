@@ -1,15 +1,12 @@
 
     <head >
         <meta charset="UTF-8">
-        <title>Artwork Provenance</title>
+        <title>ARK</title>
         <link rel="stylesheet" type="text/css" href="./style.css">
     </head>
     <article resource="#" typeof="schema:ScholarlyArticle">
     <header>
         <h1 property="schema:name">ARK</h1>
-        <p role="doc-subtitle" property="schema:alternateName">
-        Artwork Provenance
-        </p>
     </header>
     <meta property="schema:accessibilityFeature" content="alternativeText">
     <meta property="schema:accessibilityFeature" content="MathML">
@@ -52,12 +49,12 @@
     </ul>
     </section>
     <body>
-        <section style="text-align: center;width: 400px;margin: auto"  typeof = "sa:Abstract" role = "doc-abstract">
+        <section style="text-align: center;margin: auto"  typeof = "sa:Abstract" role = "doc-abstract">
         <h2>Abstract</h2>
-           <p> This solution offers an interactive way to explore the Romanian Heritage. Using this platform you can easily browse through different museums and works of art available in Romania.
+           <p> This solution offers an interactive way to explore the Romanian Artistic Heritage. Using our web platform you can easily browse through different museums and works of art available in Romania.
         Our main purpose is easing the access to the Works of art in Romanian museums. Besides that, we offer an easy way to visualize data and statistics around museums, artists and pieces of art.</p>
         </section>
-        <div  style="text-align: center;width: 1000px;margin:auto">
+        <div  style="text-align: center;margin:auto">
         <section class="identation" role="doc-index">
             <h2>Contents</h2>
             <ol>
@@ -65,16 +62,17 @@
                 <li><a href="#servicesApis">Web services and APIs</a>
                     <ol>
                         <li><a href="#dbpedia">DBPedia</a></li>
-                        <li><a href="#gettyVocabularies">Getty Vocabularies</a></li>
                         <li><a href="#sparql">SPARQL</a></li>
                         <li><a href="#govData">Governmental Data</a></li>
-                        <li><a href="#locationAPI">Google APIs</a></li>
+                        <li><a href="#locationAPI">Google Places API</a></li>
+                        <li><a href="#mapsAPI">Google Maps API</a></li>
                     </ol>
                 </li>
                 <li><a href="#arhitecture">Architecture</a>
                 <ol>
                     <li><a href="#client">Client</a></li>
                     <li><a href="#server">Server</a></li>
+                    <li><a href="#xml-to-db">Server</a></li>
                     <li><a href="#database">Database</a></li>
                     <li><a href="#overview">Overview</a></li>
                 </ol>
@@ -100,30 +98,53 @@
         </section>
         <section class="identation" id = "servicesApis">
             <h2>Web services and APIs</h2>
-            <p>In order to achieve this we will use a set of web services and APIs in order to fetch our data. This will spare us of the trouble of gathering the date regarding the artistic works that we will have to model and display.</p>
+            <p>In order to be as real-time as possible our Database will hold most of it's data just for Caching data and for the generation of statistics. However, for gathering the data we take all the information from external sources such as DBPedia, Romanian Patrimonium or Google Places (for locations). </p>
+            <h3 id="govData">Governmental Data</h3>
+            <p>The Romanian government offers, freely, multipel datasets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. However, the information extracted from here is incomplete. That’s why we need the help of DBPedia in achieving an exhaustive search. </p>
+            <p> It's main value comes from having detailed information about artworks, that wouldn't be found on Wikipedia or other APIs otherwise. For ARK we took information such as: </p>
+            <ul>
+                <li>Title</li>
+                <li>Object of Work</li>
+                <li>Museum</li>
+                <li>Author's name</li>
+                <li>Display date</li>
+                <li>Display state</li>
+                <li>Thumbnail</li>
+                <li>Measurements</li>
+                <li>Short description</li>
+            </ul>
+            <p>Although it has no further information about museums or artists, the information is valuable when it comes to artworks.</p>
+            <p>One disadvantage is in being not very machine-readable when it comes to Dates (e.g "middle of XX century", "(19)46", "1844-1856"), measurements(e.g. "33mm", "33x45", "L: 820 mm; LA: 100 mm" ) etc. Some post-processing might be necessary.
             <h3 id="dbpedia">DBPedia</h3>
-            <p>DBpedia allows you to ask <b>sophisticated queries against Wikipedia</b>, and to link the different data sets on the Web to Wikipedia data. We will use these capabilities to find out more information about certain artistic work/artist/museum.</p>
-            <h3 id="gettyVocabularies">Getty Vocabularies</h3>
-            <p>This contain structured terminology for art and other material culture, archival materials, visual surrogates, and bibliographic materials. This can be also used as a source for gathering relevant about artistic work/artist/museum and other data useful to the project.</p>
+            <p>DBpedia allows you to ask <b>sophisticated queries against Wikipedia</b>, and to link the different data sets on the Web to Wikipedia data. We can use its capabilities in order to complete the information that is not offered on. It offers clear, well-structured and interlinked data about almost any subject.</p>
+            <p> We used DBPedia for gathering information about Authors, being easy to identify by name. </p>
+            <p> Lots of valuable information is also found about museums. However, Romanian Heritage is offering the names of the museums in romanian language so a translation is required beforehand.</p>
+            <p> For artists we found information such as: </p>
+            <ul>
+                <li>Place of birth</li>
+                <li>Country</li>
+                <li>Movements/Currents he/she was an adept of</li>
+                <li>People he/she was influenced by</li>
+                <li>Trainers</li>
+                <li>Birth Date</li>
+                <li>Death Date</li>
+                <li>Description</li>
+                <li>Descriptive Image of the artist</li>
+            </ul>
             <h3 id="sparql">SPARQL</h3>
-            <p>We will access the data provided via DBPedia and Getty Vocabularies via a SPARQL endpoint. SPARQL is <b>RDF query language</b>, that is, a semantic query language for databases, able to retrieve and manipulate data stored in Resource Description Framework (RDF) format. So this will help us execute complex queries and provides an easy way to handle the data.</p>
+            <p>We accessed the data provided by DBPedia via a SPARQL endpoint. SPARQL is <b>RDF query language</b>, that is, a semantic query language for databases, able to retrieve and manipulate data stored in Resource Description Framework (RDF) format. So this will help us execute complex queries and provides an easy way to handle the data.</p>
             <figure typeof="sa:image">
             <img src="./img/sparql.png"  width="600px"/>
             <figcaption><i>SPARQL query sample</i></figcaption>
             </figure>
-            <h3 id="govData">Governmental Data</h3>
-            <p>The Romanian government offers, freely, different data sets. We will use the information they have available for statistical use, regarding the <b>Romanian Heritage</b>. This data will point us to the main artists / works of art / museum available in Romanian. The information extracted from here is minimal that’s why we need the help of DBPedia in achieving an exhaustive search. Useful information provided for a certain work of art by gov data is:</p>
-            <ul>
-                <li>name</li>
-                <li>museum</li>
-                <li>author</li>
-                <li>size</li>
-                <li>type</li>
-                <li>current</li>
-                <li>description</li>
-            </ul>
-            <h3 id = "locationAPI">Google APIs</h3>
-            <p>Pentru a vizualiza intr-o maniera interactiva muzeele din Romania am construit, cu ajutor API-ului oferit de Google (Places), o harta a tuturor locatiilor acestor atractii culturale. Am obtinut latitudinea si longitudinea muzeele puse la dispozitie prin intermediul Gov Data. De asemenea am utilizat ul alt API-ul oferit de Google (Maps) si pentru afisarea unei harti ce cuprinde toate aceste locatii.</p>
+            <h3 id = "locationAPI">Google Places API</h3>
+            <p>In order to localize the exact position of a museum, we used Google Places API. The power of this API comes from being able to identify a place/museum by only a few descriptive keywords, no matter the language. So the fact that Romanian Heritage was offered in romanian was not a big obstacle. Knowing the long/lat we could place them on a map offered by Google Maps</p>
+            <h3 id = "mapsAPI">Google Places API</h3>
+            <p>Google Maps API offers an easy way to show a map, at a wanted location, in our case centered in Romania. Furthermore, it can be easily used in adding markers, pins, circles, tags etc. We used it to localize all the museums on the map and label them.</p>
+            <figure typeof="sa:image">
+                <img src="./img/map-view.png"  width="600px"/>
+                <figcaption><i>Google map with all museum pins</i></figcaption>
+            </figure>
         </section>
         <section class="identation" id = "arhitecture">
             <h2>Architecture</h2>
@@ -138,8 +159,13 @@
             </ul>
             <p>So, in Angular, code-re usability can be achieved using Modules, Components. It provides the sharing of the code within angular Application. It also Provides ‘Dependency Injection’ (DI) and ‘Angular Routing’ features which provides the re usability of the code again and again. It provides a modular and highly scalable code to enhance the speed of development.</p>
             <h3 id="server">Server</h3>
-                <b>The Spring Framework</b> is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
+                <p><b>The Spring Framework</b> is an open source application framework that aims to make J2EE development easier. Spring aims to help structure whole applications in a consistent, productive manner, pulling together best-of-breed single-tier frameworks to create a coherent architecture.
                 Spring framework provides flexibility to configure beans in multiple ways such as XML, Annotations, and JavaConfig. With the number of features increased the complexity also gets increased and configuring Spring applications becomes tedious and error-prone.</p>
+                <p>Besides offering the endpoints, the server was also responsible of making the calls to both DBPedia and the PostgreSQL Database, cleaning up data from both those Data Sources and caching information. Furthermore, on the server the statistics and recommendations were computed and offered</p>
+                <p>The server is deployed on a Digital Ocean Droplet, in Cloud, on a Apache Tomcat Server. <a href="http://tomcat.apache.org/"> Apache Tomcat</a> is the most popular open-source container for Java Technologies </p>
+            <h3 id="xml-to-db">XML-to-Database Service</h3>
+                <p>In order for the Romanian Heritage XML to be parsed, we created a small Java service to take the XML, parse it and take just the useful information from it.</p>
+                <p>XML-to-Database Service uses SAX in order to parse the XML. It adds the new information to our PostgreSQL database and updates the old rows</p>
             <h3 id="database">Database</h3>
             <p>For persistence we will use <b>PostgreSQL</b>. As the information provided my the Romanian government on heritage is stored in a XML file we will extract the useful information and store it in a relational database, for easier access and quering.</p>
             <h3 id="overview">Overview</h3>
