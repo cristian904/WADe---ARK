@@ -25,8 +25,11 @@ https://youtu.be/WUIeGjoQGeg
  - Created Angular Client Boilerplate project
  
 15/1/2018 - 31/1/2018
- - Actual implementation of the solution
+ - Implementated server endpoints and composed SPARQL queries
+ - Developed the client side 
  - Updated the documentation
+ - Created user-guide 
+ - Updated OpenAPI specifications
 
 ## Team
 1) Padurariu Constantin Cristian
